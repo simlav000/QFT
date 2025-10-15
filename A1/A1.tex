@@ -1,0 +1,524 @@
+\documentclass[12pt]{article}
+
+% Packages
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{amsmath, amssymb, bm}
+
+\usepackage{mathtools}
+\newcommand{\w}{\omega}
+\newcommand{\phip}{\phi^{'}}
+\newcommand{\phipp}{\phi^{''}}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+\usepackage{braket}
+
+% Header & Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Name:  \underline{Simon Lavoie}}
+\fancyhead[C]{Class: \underline{PHYS 610}}
+\fancyhead[R]{Student ID: \underline{261 051 325}}
+\fancyfoot[C]{\thepage}
+
+% Title format for neatness
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection)}{0.5em}{}
+
+% Document
+\begin{document}
+
+\begin{center}
+    \Large \textbf{Assignment \#1}
+\end{center}
+\vspace{1cm}
+
+\section*{Question 1}
+\subsection*{a)}
+We will start with the four-momentum of the original electron, denoted
+$p^{\mu}_i = (E_i, \bm{p}_i)$. Using the mostly-minus metric 
+$\eta^{\mu\nu} = (+, -, -, -)$, we have that 
+$p_i^2 = E_i^2 - |\bm{p}_i|^2 = m_e^2$.
+Meanwhile, we define the four- momenta of the electron in the final state and
+the emitted photon as $p^{\mu}_f = (E_f, \bm{p}_f)$ and $q^{\mu} = (\omega,
+\bm{q})$ respectively. For the photon, we made use of $E = \hbar \omega$,
+where, in natural units, $\hbar = c = 1$. Now let us try to conserve both
+energy and momentum in this reaction in one move via four-momentum
+conservation.
+$$ p_i^{\mu} = p_f^{\mu} + q^{\mu} $$
+Now let us square this equation
+\begin{align}
+    p^2_i = m_e^2 &= (p_f^{\mu} + q^{\mu})^2 \\
+         &= p_f^2 + 2(p_f \cdot q) + q^2 \\
+         &= m_e^2 + 2(p_f \cdot q)
+\end{align}
+And cancelling the squared electron mass term on both sides we obtain 
+$p_f \cdot q = 0$, where $p_f \cdot q = E_f\omega - \bm{p_f}\cdot\bm{q}$, therefore
+$E_f\omega = \bm{p_f}\cdot\bm{q}$. Notice, however, that 
+$$\bm{p_f}\cdot\bm{q} \leq |\bm{p_f}||\bm{q}| = |\bm{p_f}|\omega$$
+$$E_f\omega \leq |\bm{p_f}|\omega$$
+$$E_f \leq |\bm{p_f}|$$
+$$E_f^2 \leq |\bm{p_f}|^2$$
+But, by the invariant, we require $E_f^2 - |\bm{p}|^2 = m_e^2 > 0$ and thus 
+$$E_f^2 > |\bm{p_f}|^2$$
+Which is clearly a contradiction. Thus, we cannot have both momentum and energy
+conservation in this instance.
+
+\subsection*{b)}
+If the photon were to pick up a nonzero mass $\mu > 0$, then the electric
+potential gains an exponential term, having a Yukawa character $V(r) =
+-\frac{kq^2}{r}e^{-\mu r}$, where $k = \frac{1}{4\pi\epsilon_0}$. If we expand
+this exponential via $$ e^{-\mu r} = 1 - \mu r + \frac{\mu^2 r^2}{2} + ...$$
+we see that at the leading order
+$$ V(r) = -\frac{kq^2}{r} + kq^2\mu $$
+Now, the Schrodinger equation for the system becomes (substituting the electric
+charge $e$ in place of $q$)
+$$ \frac{\nabla^2}{2m}\psi - \frac{ke^2}{r}\psi + kq^2\mu\psi = E\psi $$
+$$ \rightarrow  \frac{\nabla^2}{2m}\psi - \frac{ke^2}{r}\psi = (E - ke^2\mu)\psi$$ 
+Which is equivalent to a system with original potential $V(r) = -\frac{kq^2}{r}$
+but energy $E - \frac{e^2\mu}{4\pi\epsilon_0}$. Thus hydrogen would have a lower
+ionization energy.
+
+\subsection*{c)}
+A particle of mass $m$ decaying from rest must emit the electron-positron pair
+back-to-back to conserve momentum, meaning $p_+ = p_- = p$, and since both
+electrons and positrons have equal mass, it must impoart its rest energy $E_i =
+mc^2$ equally among them. Thus $$E_+ = E_- = \frac{1}{2}E_i$$
+Meanwhile, the total energy of the two products is given by
+$$ E_f = E_+ + E_- = 2\sqrt{m_ec^4 + p^2c^2} $$
+By energy conservation
+$$mc^2 = 2\sqrt{m_e^2c^4 + p^2c^2}$$
+Isolating for $p$
+\begin{align}
+    4p^2c^2 &= m^2c^4 - 4m_e^2c^4 \\
+    p       &= c\sqrt{\frac{m^2}{4} - m_e^2}
+\end{align}
+Now we can relate the momentum to the particle velocity via $p = mv$. Then, the
+magnetic force is $\bm{F} = q\bm{v} \times \bm{B}$ and since $\bm{B}$ is 
+perpendicular to the plane of the decay, the magnitude is $F = evB$. Since this
+force is centripetal, we may write $evB = mv^2/r$. Isolating for $r$ in terms
+of known quantities
+\begin{align}
+    r &= \frac{mv}{eB} \\
+      &= \frac{m}{eB}\frac{p}{m} \\
+\end{align}
+and substituting $p$ from (5):
+\begin{equation}
+    \boxed{r = \frac{c\sqrt{\frac{m^2}{4} - m_e^2}}{eB}}
+\end{equation}
+As desired.
+
+
+\subsection*{d)}
+The four-momenta of the particles are 
+\begin{align}
+    p_x^{\mu} &= \left(\tfrac{E_x}{c}, \bm{p_x}\right) \\
+    p_y^{\mu} &= \left(\tfrac{E_y}{c}, 0\right) = \left(\tfrac{m_yc^2}{c}, 0\right) = (m_yc, 0) \\
+    p_z^{\mu} &= \left(\tfrac{E_z}{c}, \bm{p_z}\right)
+\end{align}
+
+By conservation of four-momentum
+\begin{align}
+    p_x^{\mu} + p_y^{\mu} &= p_z^{\mu} \\
+    (p_x^{\mu} + p_y^{\mu})^2 &= (p_z^{\mu})^2 \\
+    m_x^2c^2 + 2\, p_y \cdot p_x + m_y^2c^2 &= m_z^2c^2 \\
+    p_y \cdot p_x &= \frac{(m_z^2 - m_x^2 - m_y^2)c^2}{2}
+\end{align}
+
+Now, by explicit evaluation of the dot product (since $p_y^\mu = (m_y c,0)$):
+\begin{align}
+    p_y \cdot p_x &= \frac{m_ycE_x}{c} = m_y E_x
+\end{align}
+
+Thus
+\begin{align}
+    m_y E_x &= \frac{(m_z^2 - m_x^2 - m_y^2)c^2}{2}
+\end{align}
+
+By energy conservation,
+\begin{align}
+    E_z &= E_x + m_yc^2,
+\end{align}
+so
+\begin{align}
+    m_y(E_z - m_yc^2) &= \frac{(m_z^2 - m_x^2 - m_y^2)c^2}{2} \\
+    E_z - m_yc^2 &= \frac{(m_z^2 - m_x^2 - m_y^2)c^2}{2m_y} \\ 
+    E_z  &= \frac{(m_z^2 - m_x^2 - m_y^2)c^2}{2m_y} + m_yc^2 \\ 
+    E_z  &= \frac{(m_z^2 - m_x^2 - m_y^2)c^2}{2m_y} + \frac{2m_y^2}{2m_y}c^2 \\ 
+    E_z  &= \frac{(m_z^2 - m_x^2 + m_y^2)c^2}{2m_y}
+\end{align}
+As desired. Meanwhile, in the head-on collision, the initial momenta, which are 
+equal and opposite in magnitude add to zero. This means particle z also has zero 
+momentum and thus
+$$E_z = m_zc^2$$
+
+
+\section*{Question 2}
+Between each pair of plates, we have an infinite tower of standing waves due to
+the fact that the wavefunctions must vanish at the boundaries. This permits
+only wavefunctions of the form $\psi_n(x) = \sin\left(\frac{n\pi x}{a}\right)$
+where $a$ is $d$ in region AB and $L - d$ in region BC. This corresponds to
+wavenumbers $k_n = \frac{n\pi}{a}$. Now, for a massless field such as this, 
+we have $E_n = p_nc = \hbar k_n c$ and since $E_n = \hbar \omega_n$, then the
+allowable angular frequencies are
+$$ \omega_n = \frac{n\pi c}{a}$$
+
+Since each mode of the field is a quantum harmonic oscillator, the vacuum
+(zero-point) contribution of each mode is
+
+$$E_n=\frac{1}{2}\hbar \omega_n = \frac{1}{2}\frac{\hbar n \pi c}{a}$$
+Thus, taking the sum of these zero-point energies for each individual harmonic
+oscillator, making sure to substitute the proper expressions for $a$ when 
+evaluating the energies in regions AB and BC respectively, we obtain
+\begin{align}
+    E &= \sum_{n=1}^\infty \frac{1}{2}\frac{\hbar n \pi c}{d}
++ \sum_{m=1}^\infty \frac{1}{2}\frac{\hbar m \pi c}{L - d} \\
+   E &= \frac{\pi c \hbar}{2} \left(\sum_{n=1}^\infty \frac{n}{d}
+       + \sum_{m=1}^\infty \frac{m}{L-d}\right)
+\end{align}
+As desired.
+
+Now, to perform the regularization, let us substitute 
+$n \rightarrow n e^{-\frac{an\pi}{d}}$ and $m \rightarrow m
+e^{-\frac{am\pi}{L-d}$ into the above result
+$$ E = \frac{\pi c \hbar}{2} \left(\sum_{n=1}^\infty
+\frac{ne^{-\frac{an\pi}{d}}}{d} + \sum_{m=1}^\infty
+\frac{me^{-\frac{am\pi}{L-d}}}{L-d}\right) $$
+Let us evaluate these sums one at a time, starting with
+\begin{align}
+    E_1&= \frac{\pi c \hbar}{2d} \sum_{n=1}^\infty n e^{-\frac{an\pi}{d}} \\
+       &= -\frac{c \hbar}{2} \frac{\partial}{\partial a}
+       \left(\sum_{n=1}^\infty e^{-\frac{an\pi}{d}}\right) \\
+       &= -\frac{c \hbar}{2} \frac{\partial}{\partial a}
+       \left(\frac{1}{1 - e^{-\frac{a\pi}{d}}}\right) \\
+       &= -\frac{c \hbar}{2} \left(-\frac{\pi}{d}\right)
+       \frac{e^{-\frac{a\pi}{d}}}{\left(1 - e^{-\frac{a\pi}{d}}\right)^2} \\
+       &= \frac{c\hbar\pi}{2d} \frac{e^{\frac{a\pi}{d}}}
+           {\left(e^{\frac{a\pi}{d}} - 1 \right)^2}
+\end{align}
+
+The equivalent calulation for the BC region gives
+\begin{align &= \frac{\pi c \hbar}{2(L-d)}\sum_{m=1}^\infty me^{-am\pi/(L-d)} \\
+        &= -\frac{c \hbar}{2}\frac{\partial}{\partial a}
+    \sum_{m=1}^\infty e^{-am\pi/(L-d)} \\
+        &= \frac{c \hbar \pi}{2(L-d)}
+        \frac{e^{a\pi/(L-d)}}{\left(e^{a\pi/(L-d)} - 1\right)^2} \\
+\end{align}
+In both instances, we proceed by taylor expanding $\frac{e^x}{(e^x - 1)^2}$
+in $x$
+\begin{align}
+    \frac{e^x}{(e^x -1)^2} &= \frac{\left(1 + x + \frac{x^2}{2!} +
+    \frac{x^3}{3!} +...\right)}{\left(x + \frac{x^2}{2!} + \frac{x^3}{3!} + ...
+\right)^2} \\
+    &= \frac{1}{x^2}\frac{\left(1 + x + \frac{x^2}{2!} +\frac{x^3}{3!} +...\right)}
+    {\left(1 + \frac{x}{2!} + \frac{x^2}{3!} + ... \right)^2}
+\end{align}
+We can use the binomial theorem $(1 + u)^{\alpha} = 1 + \alpha u +
+\frac{\alpha(\alpha - 1)}{2}u^2 + ...$ to simplify the denominator.
+Specifically, letting $u = \frac{x}{2} + \frac{x^2}{6}$ and $\alpha = -2$
+\begin{align}
+    \left(1 + \frac{x}{2!} + \frac{x^2}{3!} \right)^{-2} &= 
+1 - x + -\frac{x^2}{3} + \frac{3x^2}{4} + \mathcal{O}(x^3) \\
+    &\approx 1 - x + \frac{5x^2}{12}
+\end{align}
+And putting this result back into the above
+\begin{align}
+    \frac{e^x}{(e^x - 1)^2} &= \frac{1}{x^2}\left(1 + x + \frac{x^2}{2} +
+        \frac{x^3}{6} + ...\right) \left(1 - x + \frac{5x^2}{12} \right) \\
+    &= \frac{1}{x^2} \left(1 - \frac{1}{12}x^2 + \mathcal{O}(x^3) \right) \\
+    &= \frac{1}{x^2} - \frac{1}{12} + \mathcal{O}(x^3)
+\end{align}
+Using this, and substituting $x = \frac{a\pi}{d}$ in the AB region instance
+and $x = \frac{a\pi}{(L-d)}$ in the BC region instance, we get a total energy
+of
+\begin{align}
+    E_1 + E_2 &= \frac{\pi c \hbar}{2d} \left(\frac{d^2}{a^2\pi^2} -
+    \frac{1}{12} + \mathcal{O}(a^3)\right) + \frac{c\hbar\pi}{2(L-d)}
+    \left(\frac{(L-d)^2}{a^2\pi^2} - \frac{1}{12} + \mathcal{O}(a^3) \right) \\
+    &= \hbar c \left(\frac{d}{2\pi a^2} - \frac{\pi}{24d} + \frac{(L-d)}{2\pi
+    a^2} - \frac{\pi}{24(L-d)} + \mathcal{O}(a^3) \right) \\
+    &= \hbar c \left(\frac{L}{2\pi a^2} - \frac{\pi}{24d} - \frac{\pi}{24(L-d)}
+    + \mathcal{O}(a^3) \right)
+\end{align}
+Now, we can finally evaluate the force by taking the partial derivative of this
+expression with respect to $d$. Remarkably, the divergent first term vanishes 
+here, meaning we have a finite force even in the $a \rightarrow 0$ limit!
+As such
+\begin{align}
+    F = -\frac{\partial E}{\partial d} &= - \hbar c \left(\frac{\pi}{24d^2} 
+        - \frac{\pi}{24(L - d)^2} + ...\right)
+\end{align}
+But in the $L \gg d$ limit, this second term also vanishes. Thus, we finally
+obtain the desired result of
+\begin{equation}
+    \boxed{F \approx -\frac{\pi c \hbar}{24d^2}}
+\end{equation}
+
+
+\section*{Question 3}
+We have that the amplitude of finding the particle propagating from $x$ to $y$
+is $\mathcal{A} = \braket{y|e^{-iHT}|x}$. If we divide this distance between
+$x$ and $y$ into $N$ points labelled $(x, x_1, x_2, ..., X_{N-1}, y)$ into 
+equal intervals of time $\delta t = T/N$, then we can break up the exponential
+in the inner product as
+$$\mathcal{A} = \braket{y|e^{-iH\delta t}e^{-iH\delta t}...e^{-iH\delta t}|x}$$
+Which contains exactly $N$ such exponential factors. We may insert an identity
+operator $\mathbb{I} = \int dx \ket{x}\bra{x}$ between each such factor
+\begin{align}
+    \mathcal{A} &= \braket{y|e^{-iH\delta t}\mathbb{I}e^{-iH\delta
+    t}\mathbb{I}...e^{-iH\delta t}|x} \\
+&= \boxed{\left( \prod_{j=1}^N \int dx_j \right) \braket{y|e^{-iH\delta t}|x_{N-1}}
+\braket{x_{N-1}|e^{-iH\delta t}|X_{N-2}}...\braket{x_1|e^{-iH\delta t}|x}}
+\end{align}
+As desired. Now, taking an individual factor $f = \braket{x_{j+1}|e^{-iH\delta t}|x_j}$
+let us compute this by taking $H = \tfrac{\bm{p}^2}{2m}$ where $\bm{p}$ is an
+operator. Plugging this Hamiltonian in our expression for the factor
+$$ f = \braket{x_{j+1}|e^{-i\bm{p}^2\delta t/2m}|x_j}$$
+Inserting the identity $\mathbb{I} = \int \frac{dp}{2\pi} \ket{p}\bra{p}$ in
+the inner product and noticing that $e^{-i\bm{p}^2}\ket{p} = e^{-ip^2}\ket{p}$
+
+\begin{align}
+    &= \frac{1}{2\pi} \int dp \bra{x_{j+1}} e^{-ip^2\delta t/2m}\ket{p}\braket{p|x_j} \\
+    &= \frac{1}{2\pi} \int dp  e^{-i\bm{p}^2\delta t/2m}\braket{x_{j+1}|p}\braket{p|x_j} \\
+\end{align}
+Now, note that $\braket{x_{j+1}|p} = e^{ipx_{j+1}}$ and 
+$\braket{p|x_j} = \left(\braket{x_j|p}\right)^* = e^{-ipx_j}$ 
+such that
+\begin{align}
+    f &= \frac{1}{2\pi} \int dp e^{-ip^2\delta t/2m} e^{ip(x_{j+1} - x_j)} \\
+      &= \frac{1}{2\pi} \int dp e^{-ap^2 + bp}
+\end{align}
+where $a = \frac{i\delta t}{2m}$ and $b = i(x_{j+1} - x_j)$. Completing the
+square, $-ap^2 + bp = -a\left(p - \frac{b}{2a}\right)^2 + \frac{b^2}{4a}$ such
+that
+$$ f = \frac{e^{b^2/4a}}{2\pi} \int dp e^{-a(p - b/2a)^2} $$
+Which is a standard Gaussian integral which we evaluate over all space. Doing 
+this and substituting our values for $a$ and $b$:
+\begin{align}
+    f &= \frac{e^{b^2/4a}}{2\pi} \sqrt{\frac{\pi}{a}}\\
+      &= \boxed{\sqrt{\frac{-im}{2\pi\delta t}}\exp\left[im\frac{(x_{j+1} - x_j)^2}{2\delta
+      t}\right]}
+\end{align}
+as desired, at least up to a factor of $2\pi$.
+Now, putting the given result in for every such factor
+\begin{align}
+    \mathcal{A} &= \left(\frac{-2\pi i m}{\delta t}\right)^{N/2} \prod_{j=0}^N
+    \int dx_j\exp\left[\frac{im}{2}\frac{(x_{j+1} - x_j)^2}{\delta t}\right] \\
+    &= \left(\frac{-2\pi i m}{\delta t}\right)^{N/2} \int
+    dxdx_{N-1}dx_{N-2}...dx_1dy\exp\left[\delta t\sum_{j=0}^N
+        \frac{im}{2}\left(\frac{x_{j+1} - x_j}{\delta t}\right)^2\right] \\
+\end{align}
+Making the substitutions $\frac{x_{j+1} - x_j}{\delta t} \rightarrow \dot{x}$
+and $\delta t \sum_{j=0}^{N} \rightarrow \int_0^T dt$ in the
+$\delta t \rightarrow 0$ and $N \rightarrow \infty$ continuum limit:
+$$ \mathcal{A} = \left(\frac{-2\pi i m}{\delta t}\right)^{N/2} \int
+dxdx_{N-1}dx_{N-2}...dx_1dy\exp\left[i \int_0^T dt \frac{1}{2}
+m\dot{x}^2\right]$$
+And using $\left(\frac{-2\pi i m}{\delta t}\right)^{N/2} \prod_{j=0}^{N-1}
+\int dx_j = \int \mathcal{D}x$ in this limit we obtain
+\begin{equation}
+    \boxed{\mathcal{A} = \int \mathcal{D}x e^{i\int_0^T dt
+    \frac{1}{2}m\dot{x}^2}}
+\end{equation}
+As desired.
+
+
+
+\section*{Question 4}
+\subsection*{a)}
+Starting with the action
+\begin{align}
+    S &= \int dx \left[\frac{1}{2}\dot{\phi}^2 - \frac{1}{2}
+    (\partial_x\phi)^2 - \frac{\lambda}{4}\left(\phi^2 - \frac{m^2}{\lambda}
+    \right)^2\right] = \int \mathcal{L} dx \\
+      &= \int T - V dx\\
+\end{align}
+Such that $V[\phi] = \int dx \frac{1}{2}(\partial_x\phi)^2 + \frac{\lambda}{4}
+\left(\phi^2 - \frac{m^2}{\lambda}\right)^2$. Now, the Euler-Lagrange equation
+tells us 
+$$\frac{\delta S}{\delta \phi} = \partial_{\mu}\left(\frac{\partial
+\mathcal{L}}{\partial(\partial_{\mu}\phi)}\right) - \frac{\mathcal{L}}{\partial
+\phi} = 0$$
+We can break up the first term into its temporal part
+$\dfrac{\partial\mathcal{L}}{\partial(\partial_0\phi)}=\partial_0\phi$
+such that
+$$\partial_0\big(\dfrac{\partial\mathcal{L}}{\partial(\partial_0\phi)}\big)=\partial_0^2\phi$$
+and then its spatial part
+$\dfrac{\partial\mathcal{L}}{\partial(\partial_x\phi)}=-\partial_x\phi$
+such that
+$$\partial_x\big(\dfrac{\partial\mathcal{L}}{\partial(\partial_x\phi)}\big)=-\partial_x^2\phi$$
+and thus in sum we have $\partial_0^2\phi-\partial_x^2\phi$ from the first term.
+Meanwhile, for the second term, we have 
+\begin{align}
+    \frac{\partial \mathcal{L}}{\partial \phi} &= -\frac{\lambda}{2} \left(\phi^2
+    - \frac{m^2}{\lambda}\right)2\phi \\
+    &= -\lambda\phi(\phi^2 - m^2/\lambda)
+\end{align}
+Therefore, the full EOM is
+$$ \partial_0^2\phi - \partial_x^2\phi + \lambda\phi(\phi^2 - m^2/\lambda) = 0 $$
+Now, for the trivial solution, the EOM reduces to
+\begin{align}
+    \lambda\phi_0(\phi_0^2 - m^2\lambda) &= 0 \\
+    \boxed{\phi_0 = \pm \frac{m}{\sqrt{\lambda}}}
+\end{align}
+Then, for the space-dependent solution, our EOM becomes an ODE of the form
+\begin{align}
+    \phi^{''}(x) &= \lambda\phi(x)(\phi^2(x) - m^2/\lambda)\\
+    \phi^{'}(x)\phi^{''}(x) &= \phi^{'}(x)\lambda\phi(x)(\phi^2(x) - m^2/\lambda) \\
+\end{align}
+We can write both sides of this equation in terms of a derivative like so
+\begin{align}
+    \frac{d}{dx}\left( \frac{1}{2}(\phi^{'}(x))^2 \right) &= \frac{dV}{d\phi}\phi^{'}(x) \\
+                                                          &= \frac{dV}{d\phi}\frac{d\phi}{dx} \\
+                                                          &= \frac{d}{dx}V(\phi(x))
+\end{align}
+And integrating w.r.t. $x$
+$$ \frac{1}{2}(\phi^{'}(x))^2 - V(\phi) = C $$
+We can determine the constant of integration $C$ via the argument that for a 
+finite-energy solution, we require the field to approach the trivial vacuum
+solutions $\phi_0 = \pm \frac{m}{\sqrt{\lambda}}$ as $x\to\pm\infty$. Through this, 
+we have that $V(\pm \frac{m}{\sqrt{\lambda}}) =
+\tfrac{\lambda}{4}((\pm\frac{m}{\sqrt{\lambda}})^2-(\pm\frac{m}{\sqrt{\lambda}})^2)^2 = 0$,
+and similarly $\phi^{'}(x)\to 0$ because the slope is constant at infinity.
+Therefore, $\frac{1}{2}(\phi^{'}(\infty))^2 - V(\phi(\infty)) = 0 - 0 = 0 = C$.
+Thus, defining $\frac{m}{\sqrt{\lambda}} = \nu$ for simplicity we may continue
+with
+\begin{align}
+    \frac{1}{2}(\phi^{'}(x))^2 &= V(\phi) = \frac{\lambda}{4}(\phi^2 - \nu^2)^2 \\
+    \phi^{'}(x) &= \pm \sqrt{\frac{\lambda}{2}}(\phi^2 - \nu^2) \\
+    \frac{d\phi}{dx} &= \pm \sqrt{\frac{\lambda}{2}}(\phi^2 - \nu^2) \\
+\end{align}
+Which is a separable ODE which evaluates to
+\begin{align}
+    \ln\left|\frac{\nu + \phi}{\nu - \phi}\right| &=
+    2\nu\sqrt{\frac{\lambda}{2}}x + C_2 \\
+    \ln\left|\frac{\nu + \phi}{\nu - \phi}\right| &=
+    \sqrt{2}mx + C_2 \\
+    \frac{\nu + \phi}{\nu - \phi} &= C e^{\sqrt{2}mx} \\
+\end{align}
+Solving the above for $\phi(x)$, we obtain
+\begin{align}
+    \phi(x) = \nu \frac{Ce^{\sqrt{2}mx} - 1}{Ce^{\sqrt{2}mx} + 1} \\
+\end{align}
+Then, writing $C = e^{-\sqrt{2}mx_0}$ for some other constant $x_0$, we
+get a cleaner result, namely
+\begin{align}
+    \phi(x) = \nu \frac{e^{\sqrt{2}m(x - x_0)} - 1}{e^{\sqrt{2}m(x - x_0)} + 1} \\
+\end{align}
+Recognizing this expression as being similar to the hyperbolic tangent identity
+$$ \tanh(z) = \frac{e^{2z} - 1}{e^{2z} + 1} $$
+we finally obtain our non-trivial space-dependent background solutions
+$$ \boxed{\phi_{\text{cl}}(x) = \pm \frac{m}{\sqrt{\lambda}}\tanh\left(\frac{m(x - x_0)}{\sqrt{2}}\right)}$$
+
+\subsection*{b)}
+Starting with the action
+\begin{align}
+    S &= \int \frac{d\w d^3q}{(2\pi)^4} dr \left[A(r) \phi(r, -\w)\phipp(r, \w)
+    + B(r)\phip(r, -\w)\phip(r, \w) \\
+      &+ C(r)\phi(r, -\w)\phip(r, \w)
+  + D(r)\phi(r, -\w)\phi(r, \w) \right]
+\end{align}
+We begin by varying the action
+\begin{align}
+    \delta S = \int\!\frac{d\omega\,d^3q}{(2\pi)^4} dr\;\Big\{
+A(r)\big[\delta\phi(r,-\omega)\,\phi''(r,\omega)+\phi(r,-\omega)\,\delta\phi''(r,\omega)\big]\\
++ B(r)\big[\delta\phi'(r,-\omega)\,\phi'(r,\omega)+\phi'(r,-\omega)\,\delta\phi'(r,\omega)\big]\\
++ C(r)\big[\delta\phi(r,-\omega)\,\phi'(r,\omega)+\phi(r,-\omega)\,\delta\phi'(r,\omega)\big]\\
++ D(r)\big[\delta\phi(r,-\omega)\,\phi(r,\omega)+\phi(r,-\omega)\,\delta\phi(r,\omega)\big]\Big\}.
+\end{align}
+Now, we can look at terms containing $\delta\phi(r, \w)$ and its derivatives
+\begin{align}
+    \int & dr\;\Big[\,A(r)\,\phi(r,-\omega)\,\delta\phi''(r,\omega)
++\big(B(r)\,\phi'(r,-\omega)+C(r)\,\phi(r,-\omega)\big)\,\delta\phi'(r,\omega)\\
+&+ D(r)\,\phi(r,-\omega)\,\delta\phi(r,\omega)\Big].
+\end{align}
+Now, let's do integration by parts on the first term
+\begin{align}
+    \int dr A\phi(-\w)\delta\phipp &=
+    \Big[A\phi(-\w)\delta\phip\Big]_{r_{in}}^{r_{out}} - \int dr
+    (A\phi(-\w))'\delta\phip
+\end{align}
+Putting this back into the variation we obtain
+\begin{align}
+    \delta S|_{\delta\phi(\omega)} &= \int\!\frac{d\omega\,d^3q}{(2\pi)^4}\Big\{
+\Big[A\phi(-\omega)\,\delta\phi'\Big]_{r_{\rm in}}^{r_{\rm out}}\\
+                                   &+ \int dr\;\Big[-\big(A\phi(-\omega)\big)'\,\delta\phi' + (B\phi'(-\omega)+C\phi(-\omega))\,\delta\phi' 
++ D\phi(-\omega)\,\delta\phi\Big]\Big\}.
+\end{align}
+For convenience, let us define
+$$M(r) = -\big(A\phi(-\omega)\big)' + B\phi'(-\omega) + C\phi(-\omega)$$
+such that the integral over $r$ becomes
+$$ \int dr\;M(r)\,\delta\phi' + \int dr\;D\phi(-\omega)\,\delta\phi $$
+Let's use the same trick and integrate by parts again
+$$ \int dr\;M(r)\,\delta\phi' = \Big[ M(r)\,\delta\phi\Big]_{r_{\rm
+in}}^{r_{\rm out}} - \int dr\;M'(r)\,\delta\phi$$
+Where
+$$ M'(r) = -\big(A\phi(-\omega)\big)'' + \big(B\phi'(-\omega)\big)' + \big(C\phi(-\omega)\big)'$$
+Such that the variation on the action now reads
+
+\begin{align}
+    \delta S|_{\delta\phi(\omega)} &= \int\!\frac{d\omega\,d^3q}{(2\pi)^4}\Big\{
+\Big[A\phi(-\omega)\,\delta\phi'\Big]_{r_{\rm in}}^{r_{\rm out}}
++ \Big[\Big(-(A\phi(-\w))' + B\phi'(-\w) + C\phi(-\w)\Big)\delta\phi\Big]_{r_{\rm in}}^{r_{\rm out}} \\
+                                   &+ \int dr \Big(-\big(A\phi(-\omega)\big)''
+                                   + \big(B\phi'(-\omega)\big)' +
+                               \big(C\phi(-\omega)\big)' + D\phi(-\w)\Big)\delta\phi
+\end{align}
+The EOM is given by setting $\delta S = 0$, which implies that, in the bulk 
+integrand
+$$ (A(r)\,\phi(r,-\omega))'' - (B(r)\,\phi'(r,-\omega))' -
+(C(r)\,\phi(r,-\omega))' + D(r)\,\phi(r,-\omega)=0$$
+Which we'll write simply as
+$$(A\phi)''-(B\phi')'-(C\phi)'+D\phi=0.$$
+Expanding these terms individually
+\begin{align}
+    (A\phi)'' &= A''\phi + 2A'\phi' + A\phi'',\\
+    (B\phi')' &= B'\phi' + B\phi'',\\
+    (C\phi)' &= C'\phi + C\phi'.
+\end{align}
+Substituting into the EOM
+$$\big(A''\phi + 2A'\phi' + A\phi''\big)
+- \big(B'\phi' + B\phi''\big)
+- \big(C'\phi + C\phi'\big)
++ D\phi = 0.$$
+Collecting terms
+$$(A - B)\,\phi'' + (2A' - B' - C)\,\phi' + (A'' - C' + D)\,\phi = 0.$$
+Finally, we obtain
+$$\phi'' + \frac{2A' - B' - C}{A - B}\,\phi' + \frac{A'' - C' + D}{A - B}\,\phi = 0.$$
+Meanwhile, going back to the boundary terms obtained via integration by parts
+% 1) boundary piece as obtained after two integrations by parts
+\begin{align}
+\delta S_{\rm bdy}
+&= \int\!\frac{d\omega\,d^3q}{(2\pi)^4}\;
+\Big[\,A(r)\,\phi(r,-\omega)\,\delta\phi'(r,\omega)
++ \big(- (A(r)\phi(r,-\omega))' + B(r)\phi'(r,-\omega) \\
+&+ C(r)\phi(r,-\omega)\big)\,\delta\phi(r,\omega)
+\Big]_{r_{\rm in}}^{r_{\rm out}}.
+\end{align}
+we expand the derivative on the second term and collect like terms
+% 2) expand and simplify the bracket
+\begin{align}
+-(A\phi)' + B\phi' + C\phi
+&= -\big(A'\phi + A\phi'\big) + B\phi' + C\phi \\
+&= (B - A)\,\phi' + (C - A')\,\phi .
+\end{align}
+such that the boundary variation obtains the form
+% 3) simplified boundary variation
+\begin{align}
+\delta S_{\rm bdy}
+&= \int\!\frac{d\omega\,d^3q}{(2\pi)^4}\;
+\Big[\,A(r)\,\phi(r,-\omega)\,\delta\phi'(r,\omega)
++ \big((B(r)-A(r))\,\phi'(r,-\omega) \\
+&+ (C(r)-A'(r))\,\phi(r,-\omega)\big)\,\delta\phi(r,\omega)
+\Big]_{r_{\rm in}}^{r_{\rm out}}.
+\end{align}
+Unfortunately, from here, I am not sure how to go much further.
+
+
+
+
+
+
+\end{document}
