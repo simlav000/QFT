@@ -1,0 +1,158 @@
+\documentclass[12pt]{article}
+
+% Packages
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{amsmath, amssymb, bm}
+\usepackage{cancel}
+
+\usepackage{mathtools}
+\newcommand{\w}{\omega}
+\newcommand{\phip}{\phi^{'}}
+\newcommand{\phipp}{\phi^{''}}
+\newcommand{\delmu}{\partial_{\mu}}
+\newcommand{\delMu}{\partial^{\mu}}
+\newcommand{\wk}{\omega_{\mathbf{k}}}
+\newcommand{\wkp}{\omega_{\mathbf{k'}}}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+\usepackage{braket}
+
+% Header & Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Name:  \underline{Simon Lavoie}}
+\fancyhead[C]{Class: \underline{PHYS 610}}
+\fancyhead[R]{Student ID: \underline{261 051 325}}
+\fancyfoot[C]{\thepage}
+
+% Title format for neatness
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection)}{0.5em}{}
+
+% Document
+\begin{document}
+
+\section*{Question 3}
+We can imagine $\phi$ and $\phi^{\dagger}$ as a sum of two real fields $\phi_1$ 
+and $\phi_2$, such that $\phi = \phi_1 + i\phi_2$ and $\phi^{\dagger} = \phi_1 -
+i\phi_2$. Plugging this presecription into our Lagrangian
+\begin{align*}
+   \mathcal{L} &= \frac{1}{2}\delmu\phi\delMu\phi^{\dagger} \\ 
+               &= \frac{1}{2}\delmu(\phi_1 + i \phi_2)\delMu(\phi_1 - i\phi_2) \\
+               &= \frac{1}{2}\delmu\phi_1\delMu\phi_1
+               + \frac{1}{2}\delmu\phi_2\delMu\phi_2
+               + \frac{i}{2}\delmu\phi_2\delMu\phi_1
+               - \frac{i}{2}\delmu\phi_1\delMu\phi_2 \\
+               &= \frac{1}{2}\delmu\phi_1\delMu\phi_1
+               + \frac{1}{2}\delmu\phi_2\delMu\phi_2
+               + \frac{i}{2}\delmu\delMu\phi_2\phi_1
+               - \frac{i}{2}\delmu\delMu\phi_2\delMu\phi_1 \\
+               &= \frac{1}{2}\delmu\phi_1\delMu\phi_1
+               + \frac{1}{2}\delmu\phi_2\delMu\phi_2
+\end{align*}
+because two independent scalar fields $\phi_1$, $\phi_2$ commute. Thus, we can
+see this Lagrangian describes two independent scalar field theories. Now,
+let us quantize both $\phi_1$ and $\phi_2$ independently, giving them each
+their own creation and annihilation operators, which we shall label $\alpha$ 
+and $\beta$.
+\begin{align*}
+   \phi_1(x) &= \int \frac{d^3k}{(2\pi)^3} \frac{1}{\sqrt{2\omega_k}} (\alpha_k
+   e^{-ik\cdot x} + \alpha_k^{\dagger}e^{ik\cdot x}) \\
+   \phi_2(x) &= \int \frac{d^3k}{(2\pi)^3} \frac{1}{\sqrt{2\omega_k}} (\beta
+   e^{-ik\cdot x} + \beta^{\dagger}e^{ik\cdot x}) \\
+\end{align*}
+Using these definitions, we write $\phi$ and $\phi^{\dagger}$
+\begin{align*}
+   \phi(x) &= \int \frac{d^3k}{(2\pi)^3} \frac{1}{\sqrt{2\omega_k}} \left(
+   (\alpha_k + i\beta_k)e^{-ik\cdot x} + (\alpha^{\dagger}_k +
+   i\beta^{\dagger}_k)e^{ik\cdot x} \right) \\
+   \phi^{\dagger}(x) &= \int \frac{d^3k}{(2\pi)^3} \frac{1}{\sqrt{2\omega_k}}
+   \left( (\alpha_k - i\beta_k)e^{ik\cdot x} + (\alpha^{\dagger}_k -
+   i\beta^{\dagger}_k)e^{-ik\cdot x} \right) \\
+\end{align*}
+let us now define $a = \alpha_k + i\beta_k$ and $b = \alpha_k - i\beta_k$. Then,
+immediately we see $a^{\dagger} = \alpha_k^{\dagger} - i\beta_k^{\dagger}$ and 
+$b^{\dagger} = \alpha_k^{\dagger} + i \beta_k^{\dagger}$ such that
+
+\begin{align*}
+   \phi(x) &= \int \frac{d^3k}{(2\pi)^3} \frac{1}{\sqrt{2\omega_k}} \left(
+   a_k e^{-ik\cdot x} + b_k^{\dagger}e^{ik\cdot x}
+   \right) \\
+   \phi^{\dagger}(x) &= \int \frac{d^3k}{(2\pi)^3} \frac{1}{\sqrt{2\omega_k}}
+   \left( a^{\dagger}_k e^{ik\cdot x} + b_k e^{-ik\cdot x} \right) \\
+\end{align*}
+Now, let's compute $[\phi(x), \phi^{\dagger}(y)]$
+
+\begin{align*}
+   [\phi(x),\phi^\dagger(y)]
+   &=\int \frac{d^3\mathbf{k}}{(2\pi)^3}
+          \frac{d^3\mathbf{k}'}{(2\pi)^3}\,
+          \frac{1}{\sqrt{2\omega_{\mathbf{k}}}
+                   \sqrt{2\omega_{\mathbf{k}'}}}\,
+   \Big[
+     \big(a_{\mathbf{k}} e^{-ik\cdot x}
+      + b_{\mathbf{k}}^\dagger e^{+ik\cdot x}\big),
+     \big(a_{\mathbf{k}'}^\dagger e^{+ik'\cdot y}
+      + b_{\mathbf{k}'} e^{-ik'\cdot y}\big)
+   \Big] \\[6pt]
+   &=\int \frac{d^3\mathbf{k}}{(2\pi)^3}
+           \frac{d^3\mathbf{k}'}{(2\pi)^3}\,
+           \frac{1}{\sqrt{2\omega_{\mathbf{k}}}
+                    \sqrt{2\omega_{\mathbf{k}'}}}\,
+   \Big(
+     a_{\mathbf{k}} a_{\mathbf{k}'}^\dagger e^{-ik\cdot x} e^{+ik'\cdot y}
+    +a_{\mathbf{k}} b_{\mathbf{k}'} e^{-ik\cdot x} e^{-ik'\cdot y} \\
+   &\qquad\qquad
+    +b_{\mathbf{k}}^\dagger a_{\mathbf{k}'}^\dagger e^{+ik\cdot x} e^{+ik'\cdot y}
+    +b_{\mathbf{k}}^\dagger b_{\mathbf{k}'} e^{+ik\cdot x} e^{-ik'\cdot y} \\
+   &\qquad\qquad
+    -a_{\mathbf{k}'}^\dagger a_{\mathbf{k}} e^{+ik'\cdot y} e^{-ik\cdot x}
+    -b_{\mathbf{k}'} a_{\mathbf{k}} e^{-ik'\cdot y} e^{-ik\cdot x} \\
+   &\qquad\qquad
+    -a_{\mathbf{k}'}^\dagger b_{\mathbf{k}}^\dagger e^{+ik'\cdot y} e^{+ik\cdot x}
+    -b_{\mathbf{k}'} b_{\mathbf{k}}^\dagger e^{-ik'\cdot y} e^{+ik\cdot x}
+   \Big) \\[6pt]
+   &=\int \frac{d^3\mathbf{k}}{(2\pi)^3}
+           \frac{d^3\mathbf{k}'}{(2\pi)^3}\,
+           \frac{1}{\sqrt{2\omega_{\mathbf{k}}}
+                    \sqrt{2\omega_{\mathbf{k}'}}}\,
+   \Big(
+    [a_{\mathbf{k}},a_{\mathbf{k}'}^\dagger]\,e^{-ik\cdot x}e^{+ik'\cdot y}
+    +[a_{\mathbf{k}},b_{\mathbf{k}'}]\,e^{-ik\cdot x}e^{-ik'\cdot y} \\
+   &\qquad\qquad
+    +[b_{\mathbf{k}}^\dagger,a_{\mathbf{k}'}^\dagger]\,e^{+ik\cdot x}e^{+ik'\cdot y}
+    +[b_{\mathbf{k}}^\dagger,b_{\mathbf{k}'}]\,e^{+ik\cdot x}e^{-ik'\cdot y}
+   \Big) \\[6pt]
+   &=\int \frac{d^3\mathbf{k}}{(2\pi)^3}
+           \frac{d^3\mathbf{k}'}{(2\pi)^3}\,
+           \frac{1}{\sqrt{2\omega_{\mathbf{k}}}
+                    \sqrt{2\omega_{\mathbf{k}'}}}\,
+   \Big(
+    (2\pi)^3\delta^{(3)}(\mathbf{k}-\mathbf{k}')\,e^{-ik\cdot x}e^{+ik'\cdot y}
+    -(2\pi)^3\delta^{(3)}(\mathbf{k}-\mathbf{k}')\,e^{+ik\cdot x}e^{-ik'\cdot y}
+   \Big) \\[6pt]
+   &=\int \frac{d^3\mathbf{k}}{(2\pi)^3}\,
+         \frac{1}{2\omega_{\mathbf{k}}}\,
+         \Big(e^{-ik\cdot(x-y)} - e^{+ik\cdot(x-y)}\Big). \\
+   &= \int \frac{d^3k}{(2\pi)^3} e^{-i\mathbf{k}(\mathbf{x} - \mathbf{y})}
+   \left(\frac{1}{2\omega_k} e^{-ik\cdot(x-y)}\bigg|_{k^0 = \omega_k}
+   + \frac{1}{-2\omega_k}e^{-ik\cdot(x-y)}\bigg|_{k^0 = -\omega_k}\right) \\
+   &= \int \frac{d^3k}{(2\pi)^3} \int \frac{dp^0}{2\pi i} \frac{-1}{p^2 - m^2}
+   e^{-ik\cdot (x-y)} \\
+   &= \int \frac{d^4k}{(2\pi)^4} \frac{i}{p^2 - m^2} e^{-ik\cdot(x-y)}
+\end{align*}
+which we immediately recognize as $D_R(x-y)$, the retarded propagator. It makes
+sense that the commutator would yield the retarded propagator because the
+commutator measures how much the quantum field $\phi$ at one point in spacetime
+$x$ interferes with $\phi^{\dagger}$ at a later point $y$, and $D_R(x-y)$
+describes what this causal effect is.
+
+Next, to find the Hamiltonian, we will use the usual formula
+\begin{equation*}
+   H = \int d^3x \mathcal{H} = \frac{1}{2} \int d^3 x (\pi^2(x) + 
+\end{equation*}
+\end{document}
+
