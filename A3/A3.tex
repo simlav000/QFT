@@ -11,8 +11,11 @@
 \newcommand{\w}{\omega}
 \newcommand{\phip}{\phi^{'}}
 \newcommand{\phipp}{\phi^{''}}
+\newcommand{\del}{\partial}
 \newcommand{\delmu}{\partial_{\mu}}
 \newcommand{\delMu}{\partial^{\mu}}
+\newcommand{\delnu}{\partial_{\nu}}
+\newcommand{\delNu}{\partial^{\nu}}
 \newcommand{\wk}{\omega_{\mathbf{k}}}
 \newcommand{\wkp}{\omega_{\mathbf{k'}}}
 \DeclarePairedDelimiter\bra{\langle}{\rvert}
@@ -34,6 +37,251 @@
 
 % Document
 \begin{document}
+
+\section*{Question 1: Pole structures of the two-point functions}
+The two-point functions in momentum space are given by:
+\begin{equation*}
+    D_F(p) = \frac{i}{p^2 - m^2 + i\epsilon}
+\end{equation*}
+For a free massless scalar field theory, we set $m=0$:
+\begin{align*}
+    D_F(p) &= \frac{i}{(p^0)^2 - \mathbf{p}^2 + i\epsilon} \\
+    &= \frac{i}{(p^0 - |\mathbf{p}| + i\epsilon)(p^0 + |\mathbf{p}| - i\epsilon)}
+\end{align*}
+thus we have simple poles at $p^0 = \pm |\mathbf{p}| \mp i\epsilon$. We can compute the
+residues via the formula:
+\begin{equation*}
+    \text{Res}(f, z_0) = \lim_{z \to z_0} (z - z_0) f(z)
+\end{equation*}
+where $z_0$ are our two poles and $f(z)$ is our two-point function $D_F(p)$. We find:
+\begin{align*}
+    \text{Res}(D_F, |\mathbf{p}| - i\epsilon) &= \lim_{p^0 \to |\mathbf{p}| -
+    i\epsilon} (p^0 - |\mathbf{p}| + i\epsilon) \frac{i}{(p^0 - |\mathbf{p}| + i\epsilon)(p^0 + |\mathbf{p}| - i\epsilon)}
+ \\
+    &= \lim_{p^0 \to |\mathbf{p}| - i\epsilon} \frac{i}{p^0 + |\mathbf{p}| -
+    i\epsilon} = \frac{i}{2(|\mathbf{p}|  - i\epsilon)} \\
+    %comment
+    \text{Res}(D_F, -|\mathbf{p}| + i\epsilon) &= \lim_{p^0 \to -|\mathbf{p}| +
+    i\epsilon} (p^0 + |\mathbf{p}| - i\epsilon) D_F(p) \\
+    &= \lim_{p^0 \to -|\mathbf{p}| + i\epsilon} \frac{i}{p^0 - |\mathbf{p}| +
+    i\epsilon} = -\frac{i}{2(|\mathbf{p}| + i\epsilon)}
+\end{align*}
+In the non-relativistic limit, we instead have:
+\begin{align*}
+    D_F(p) &= \frac{i}{(p^0)^2 - m^2 + i\epsilon} \\
+    &= \frac{i}{(p^0 - m + i\epsilon)(p^0 + m - i\epsilon)}
+\end{align*}
+and so in an identical manner, we find simple poles at $p^0 = \pm m \mp i\epsilon$ with
+residues:
+\begin{align*}
+    \text{Res}(D_F, m - i\epsilon) &= \lim_{p^0 \to m - i\epsilon} (p^0 - m + i\epsilon)
+    D_F(p) \\
+    &= \lim_{p^0 \to m - i\epsilon} \frac{i}{p^0 + m - i\epsilon} = \frac{i}{2(m - i\epsilon)} \\
+    %comment
+    \text{Res}(D_F, -m + i\epsilon) &= \lim_{p^0 \to -m + i\epsilon} (p^0 + m - i\epsilon)
+    D_F(p) \\
+    &= \lim_{p^0 \to -m + i\epsilon} \frac{i}{p^0 - m + i\epsilon} = -\frac{i}{2(m + i\epsilon)} \\
+\end{align*}
+Thus, the Feynmann propagator
+\begin{align*}
+    D_F(x-y) &= \int \frac{d^4p}{(2\pi)^4} \frac{i e^{-ip\cdot(x-y)}}{(p^0)^2 - m^2
+    + i\epsilon} \\
+    &= \int \frac{d^3\mathbf{p}}{(2\pi)^3} \int \frac{dp^0}{2\pi} \frac{i
+    e^{-ip^0(x^0 - y^0) + i\mathbf{p}\cdot(\mathbf{x}-\mathbf{y})}}{(p^0)^2 - m^2
+    + i\epsilon} \\
+    &= \int \frac{d^3\mathbf{p}}{(2\pi)^3}e^{i\mathbf{p}\cdot (\mathbf{x} - \mathbf{y})} \int \frac{dp^0}{2\pi} \frac{i
+    e^{-ip^0(x^0 - y^0)}}{(p^0)^2 - m^2 + i\epsilon} \\
+    &= \delta^3(x - y) \int \frac{dp^0}{2\pi} \frac{i
+    e^{-ip^0(x^0 - y^0)}}{(p^0  - m + i\epsilon)(p^0 + m - i\epsilon)}
+\end{align*}
+Now, let us define 
+\begin{align*}
+    I(t) &= \int \frac{dp^0}{2\pi}e^{-ip^0 t} \frac{i}{(p^0  - m +
+    i\epsilon)(p^0 + m - i\epsilon)}  \\
+    &= \int \frac{dp^0}{2\pi} e^{-ip^0 t} D_F(p)
+\end{align*}
+where $t = x^0 - y^0$. We can evaluate this integral using the residue theorem.
+Notice that the  inclusion of the $e^{-ip^0t}$ has  the same poles as
+$D_F(p)$, because it is analytic. We consider two cases: $t>0$ and $t<0$. For
+$t>0$, we close the contour in the lower half-plane, which encloses the pole at
+$p^0 = m - i\epsilon$. Thus, we find:
+\begin{align*}
+    I(t) &= \frac{-2\pi i}{2\pi} \cdot \text{Res}(D_F, m - i\epsilon) e^{-i(m - i\epsilon)t} \\
+    &= -i \cdot \frac{i}{2(m - i\epsilon)} e^{-i(m - i\epsilon)t} \\
+    &= \frac{1}{2(m - i\epsilon)} e^{-i(m - i\epsilon)t}
+\end{align*}
+Such that the lower half-plane result is
+\begin{equation*}
+   D_{F_l}(x-y) = \delta^3(x-y) \frac{1}{2(m - i\epsilon)} e^{-i(m - i\epsilon)(x^0 - y^0)}
+\end{equation*}
+For $t<0$, we close the contour in the upper half-plane, and we obtain  an equivalent 
+result:
+\begin{equation*}
+    D_{F_u}(x-y) = \delta^3(x-y) \frac{1}{2(m + i\epsilon)} e^{i(m + i\epsilon)(x^0 - y^0)}
+\end{equation*}
+We can combine these two results into one expression using the Heaviside step function
+$\theta(t)$:
+\begin{equation*}
+    D_F(x-y) = \delta^3(x-y) \left[ \theta(t) \frac{e^{-i(m  - i\epsilon)t}}{2(m - i\epsilon)} 
+    +  \theta(-t) \frac{e^{i(m + i\epsilon)t}}{2(m + i\epsilon)} \right] \\
+\end{equation*}
+Taking the limit $\epsilon \to 0$, we find:
+\begin{align*}
+    D_F(x-y) &= \delta^3(x-y) \left[ \theta(t) \frac{e^{-imt}}{2m} +  \theta(-t)
+    \frac{e^{imt}}{2m} \right] \\
+    &= \delta^3(x-y) \frac{1}{2m} \left[ \theta(t) e^{-imt} +  \theta(-t) e^{imt}
+    \right] \\
+    &= \delta^3(x-y) \frac{1}{2m} e^{-im|t|} \\
+\end{align*}
+\begin{equation}
+    \boxed{D_F(x-y) = \delta^3(x-y) \frac{1}{2m} e^{-im|x^0 - y^0|}}
+\end{equation}
+
+Now, let us consider the scalar field theory with action 
+\begin{equation}
+    S =  \int d^{D+1}x \left( \frac{1}{2}\delmu\phi\delMu\phi + |\lambda_2|\phi^2 + \lambda_3\phi^4 \right)
+\end{equation}
+We always begin by computing the minima of the potential, which  in this case is $|\lambda_2|\phi^2 + \lambda_3\phi^4$. We find:
+\begin{align*}
+    \frac{d}{d\phi} (|\lambda_2|\phi^2 + \lambda_3\phi^4) &= 2|\lambda_2|\phi + 4\lambda_3\phi^3 = 0 \\
+    \phi(2|\lambda_2| + 4\lambda_3\phi^2) &= 0
+\end{align*}
+Thus, we have three stationary points: $\phi_c = 0$ and $\phi = \pm
+\sqrt{\frac{-|\lambda_2|}{2\lambda_3}}$. The following plot shows that $\lambda_3 < 0$ is 
+the only case where we have local minima at $\phi = \pm \sqrt{\frac{-|\lambda_2|}{2\lambda_3}}$:
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{fig.png}
+\end{center}
+In the case where the potential has $\lambda_2\phi^2$ instead of
+$|\lambda_2|\phi^2$, then when $\lambda_2 < 0$ we have a single minimum at $\phi = 0$,
+and when $\lambda_2 > 0$ we have local maxima at $\phi = 0$ and local minima at $\phi = \pm
+\sqrt{\frac{-|\lambda_2|}{2\lambda_3}}$.
+
+Now, we can expand the field around one of the minima $\phi_c = \pm
+\sqrt{\frac{-|\lambda_2|}{2\lambda_3}}$ by defining a fluctuation field
+$\phi = \varphi - \phi_c$. The potential becomes
+\begin{equation}
+    V(\varphi) = -|\lambda_2|\varphi^2 + \lambda_3 \varphi^4,
+\end{equation}
+and expanding around $\phi_c$ gives
+\begin{align}
+    V(\phi_c + \phi)
+    &= V(\phi_c) + V'(\phi_c)\phi + \frac{1}{2}V''(\phi_c)\phi^2 + \mathcal{O}(\phi^3) \\
+    &= \frac{|\lambda_2|^2}{4\lambda_3} + 2|\lambda_2|\phi^2 + \mathcal{O}(\phi^3),
+\end{align}
+where we used $V'(\phi_c) = 0$ and $V''(\phi_c) = 4|\lambda_2|$.
+
+Thus, the potential near the minimum is approximately quadratic:
+\begin{equation}
+    V(\phi) \simeq \frac{|\lambda_2|^2}{4\lambda_3} + 2|\lambda_2|\phi^2.
+\end{equation}
+
+The constant term does not affect the dynamics, so the quadratic (free) part of the action becomes
+\begin{equation}
+    S[\phi] = \frac{1}{2}\int d^{D+1}x\,\left( \partial_\mu\phi\,\partial^\mu\phi - 4|\lambda_2|\,\phi^2 \right).
+\end{equation}
+By comparison with the canonical Klein–Gordon form
+\[
+    S = \frac{1}{2}\int d^{D+1}x\,\left( \partial_\mu\phi\,\partial^\mu\phi - m^2\phi^2 \right),
+\]
+we identify the new mass as
+\begin{equation}
+    m = 2\sqrt{|\lambda_2|}.
+\end{equation}
+This way, we can write the Feynmann propagator as 
+\begin{equation*}
+    D_F(p) = \frac{i}{p^2 - 4|\lambda_2| + i\epsilon}.
+\end{equation*}
+With simple poles at $p^0 = \pm \sqrt{\mathbf{p}^2 + 4|\lambda_2|} \mp i\epsilon$ and residues:
+\begin{align*}
+    \text{Res}(D_F, \sqrt{\mathbf{p}^2 + 4|\lambda_2|} - i\epsilon) &= \frac{i}{2(\sqrt{\mathbf{p}^2 + 4|\lambda_2|} - i\epsilon)} \\
+    \text{Res}(D_F, -\sqrt{\mathbf{p}^2 + 4|\lambda_2|} + i\epsilon) &= -\frac{i}{2(\sqrt{\mathbf{p}^2 + 4|\lambda_2|} + i\epsilon)}
+\end{align*}
+
+To obtain the propagator in coordinate space, we perform the Fourier transform:
+\begin{align*}
+    D_F(x - y) &= \int \frac{d^{D+1}p}{(2\pi)^{D+1}} \,
+    \frac{i\,e^{-ip\cdot(x - y)}}{p^2 - 4|\lambda_2| + i\epsilon}. \\
+    D_F(x - y) &=
+    \int \frac{d^D\mathbf{p}}{(2\pi)^D} e^{i\mathbf{p}\cdot(\mathbf{x} - \mathbf{y})}
+    \int \frac{dp^0}{2\pi} \,
+    \frac{i\,e^{-ip^0(x^0 - y^0)}}{(p^0)^2 - (\mathbf{p}^2 + 4|\lambda_2|) + i\epsilon}.
+\end{align*}
+
+The integrand has simple poles at
+\[
+    p^0 = \pm E_{\mathbf{p}} \mp i\epsilon, \qquad
+    E_{\mathbf{p}} = \sqrt{\mathbf{p}^2 + 4|\lambda_2|}.
+\]
+Closing the contouts and using the residue theorem in the same manner as before, we find:
+\begin{equation}
+    \boxed{D_F(x - y)
+    = \int \frac{d^D\mathbf{p}}{(2\pi)^D}
+    \frac{e^{i\mathbf{p}\cdot(\mathbf{x} - \mathbf{y})}}{2E_{\mathbf{p}}}
+    \left[
+        \theta(x^0 - y^0) e^{-iE_{\mathbf{p}}(x^0 - y^0)}
+        + \theta(y^0 - x^0) e^{+iE_{\mathbf{p}}(x^0 - y^0)}
+    \right]}
+\end{equation}
+
+\section*{Question 2: Energy-momentum tensor in field theory}
+For a free scalar field theory, we have the Lagrangian density
+\begin{align*}
+    \mathcal{L} &= \frac{1}{2}\delmu\phi\delMu\phi - \frac{1}{2}m^2\phi^2.\\
+    &= \frac{1}{2}\eta^{\mu\nu}\delmu\phi\delnu\phi - \frac{1}{2}m^2\phi^2.\\
+\end{align*}
+Or, on some arbitrary curved spacetime with metric $g_{\mu\nu}$, we have
+\begin{equation*}
+    \mathcal{L} = \frac{1}{2}g^{\mu\nu}\delmu\phi\delnu\phi - \frac{1}{2}m^2\phi^2.
+\end{equation*}
+Running with this, we can compute
+\begin{align*}
+    -\frac{2}{\sqrt{-g}}\frac{\partial(\sqrt{-g}\mathcal{L})}{\partial g^{\mu\nu}}
+    &= -\frac{2}{\sqrt{-g}} \left( \frac{\partial\sqrt{-g}}{\partial g^{\mu\nu}}\mathcal{L} + \sqrt{-g}\frac{\partial\mathcal{L}}{\partial g^{\mu\nu}} \right)\\
+\end{align*}
+Using the matrix identity $\ln \det A = \text{tr} \ln A$, and varying both sides, we find
+\begin{align*}
+    \delta(\ln \det A) &= \delta(\text{tr} \ln A) \\
+    &= \text{tr}(\delta \ln A) \\
+    &= \text{tr} (A^{-1}\delta A) \\
+\end{align*}
+Therefore, we have
+\begin{equation*}
+    \frac{\delta(\det A)}{\det A} = \text{tr}(A^{-1}\delta A).
+\end{equation*}
+Putting this in the language of metrics, we have
+\begin{align*}
+    \frac{\delta g}{g} &= g^{\mu\nu}\delta g_{\mu\nu} \\
+    \delta g &= g g^{\mu\nu}\delta g_{\mu\nu} \\
+\end{align*}
+Therefore, we can compute
+\begin{align*}
+    \delta \sqrt{-g} &= -\frac{1}{2\sqrt{-g}}\delta g \\
+    &= -\frac{1}{2\sqrt{-g}} g g^{\mu\nu}\delta g_{\mu\nu} \\
+    &= -\frac{1}{2}\sqrt{-g} g^{\mu\nu}\delta g_{\mu\nu} \\
+    \frac{\partial \sqrt{-g}}{\partial g^{\mu\nu}} &= -\frac{1}{2}\sqrt{-g} \; g_{\mu\nu} \\
+\end{align*}
+Putting this back into our expression, we find
+\begin{align*}
+    \frac{2}{\sqrt{-g}}\frac{\partial(\sqrt{-g}\mathcal{L})}{\partial g^{\mu\nu}}
+    &= \frac{2}{\sqrt{-g}} \left( -\frac{1}{2}\sqrt{-g} \;
+    g_{\mu\nu}\left(\frac{1}{2}\delmu\phi\delnu\phi - \frac{1}{2}m^2\phi^2\right)+
+    \sqrt{-g}\left(\frac{1}{2}\delmu\phi\delnu\phi \right)\right)\\
+    &= -g_{\mu\nu}\left(\frac{1}{2}\delmu\phi\delnu\phi - \frac{1}{2}m^2\phi^2\right) + \delmu\phi\delnu\phi \\
+    &= \delmu\phi\delnu\phi - g_{\mu\nu}\mathcal{L}\\
+\end{align*}
+Or, swapping back to Minkowski space, we have
+\begin{equation*}
+    \boxed{T_{\mu\nu} = \delmu\phi\delnu\phi - \eta_{\mu\nu}\mathcal{L}.}
+\end{equation*}
+Just as was obtained using Noether's theorem.
+
+To couple the free field theory Lagrangian to gravity, we replace the Minkowski
+metric with a general metric $g_{\mu\nu}$, and we include a factor of
+$\sqrt{-g}$ to ensure that the action is a scalar under general coordinate
+transformations. Lastly, we would also have to make the derivatives covariant
+instead of partial, but since $\phi$ is a scalar field, the covariant derivative
+reduces to the partial derivative.
 
 \section*{Question 3}
 We can imagine $\phi$ and $\phi^{\dagger}$ as a sum of two real fields $\phi_1$ 
@@ -150,9 +398,105 @@ commutator measures how much the quantum field $\phi$ at one point in spacetime
 $x$ interferes with $\phi^{\dagger}$ at a later point $y$, and $D_R(x-y)$
 describes what this causal effect is.
 
-Next, to find the Hamiltonian, we will use the usual formula
-\begin{equation*}
-   H = \int d^3x \mathcal{H} = \frac{1}{2} \int d^3 x (\pi^2(x) + 
-\end{equation*}
-\end{document}
+Next, to find the Hamiltonian, we will need to compute the conjugate momenta
+\begin{align*}
+   \pi(x) &= \frac{\partial \mathcal{L}}{\partial(\del_0 \phi)} = \del^0
+   \phi^{\dagger} \\
+   \pi^{\dagger}(x) &= \frac{\partial \mathcal{L}}{\partial(\del_0
+   \phi^{\dagger})} = \del^0 \phi \\
+\end{align*}
+then, the Hamiltonian density is given by
+\begin{align*}
+    \mathcal{H} &= \pi \del_0 \phi + \pi^{\dagger} \del_0 \phi^{\dagger} -
+    \mathcal{L} \\
+    &= \del^0 \phi^{\dagger} \del_0 \phi + \del^0 \phi \del_0
+    \phi^{\dagger} - \left( \delmu\phi^{\dagger}\delMu\phi \right) \\
+    &= \del^0 \phi^{\dagger} \del_0 \phi + \del^0 \phi \del_0
+    \phi^{\dagger} - \left( \del^0\phi^{\dagger}\del_0\phi -
+    \nabla\phi^{\dagger}\cdot\nabla\phi \right) \\
+    &= \nabla\phi^{\dagger}\cdot\nabla\phi + \del^0 \phi^{\dagger} \del_0 \phi \\
+\end{align*}
 
+Now, considering the massive case, we have the Lagrangian
+\begin{equation*}
+   \mathcal{L} = \delmu\phi^{\dagger}\delMu\phi - \tfrac12 m^2 \phi^{\dagger}\phi
+\end{equation*}
+If we consider a transformation 
+\begin{equation*}
+   \phi \;\to\; \phi' \,=\, e^{-i\theta}\phi, \qquad
+   \phi^\dagger \;\to\; \phi'^{\dagger} \,=\, e^{+i\theta}\phi^\dagger .
+\end{equation*}
+then we can tell that if we were to plug this into the Lagrangian, we would
+find no change since in both terms, the exponential factors cancel. Further,
+expanding the rotated fields in terms of real components, we find
+\begin{align*}
+   \phi' \,=\, \phi_1'+i\phi_2'
+   \;=\; e^{-i\theta}\,(\phi_1+i\phi_2)
+   \;=\; (\cos\theta\,\phi_1+\sin\theta\,\phi_2)
+   \;+\; i(\cos\theta\,\phi_2-\sin\theta\,\phi_1)
+\end{align*}
+so
+\begin{align*}
+   \begin{pmatrix}\phi_1'\\ \phi_2'\end{pmatrix}
+   \;=\;
+   \begin{pmatrix}
+      \cos\theta & \ \ \sin\theta \\
+      -\sin\theta & \ \ \cos\theta
+   \end{pmatrix}
+   \begin{pmatrix}\phi_1\\ \phi_2\end{pmatrix}.
+\end{align*}
+Thus the global phase $\phi\to e^{-i\theta}\phi$ acts as a rotation by angle $\theta$ in the $(\phi_1,\phi_2)$ plane.
+Now, considering a small $\theta$, we can expand the exponentials to first order in $\theta$:
+\begin{align*}
+   e^{-i\theta} &\simeq 1 - i\theta, \\
+   e^{+i\theta} &\simeq 1 + i\theta,
+\end{align*}
+so
+\begin{align*}
+    \phi' &= (1 - i\theta)\phi = \phi - i\theta\phi, \\
+   \therefore \delta\phi &= -i\theta\,\phi \\
+   \phi'^{\dagger} &= (1 + i\theta)\phi^{\dagger} = \phi^{\dagger} + i\theta\phi^{\dagger}, \\
+   \therefore \delta\phi^\dagger &= +i\theta\,\phi^\dagger
+\end{align*}
+Now, we can find the conserved current using Noether's theorem:
+\begin{align*}
+   J^\mu
+   &= \frac{\partial \mathcal{L}}{\partial(\del_\mu \phi)}\,\delta\phi
+     \;+\; \frac{\partial \mathcal{L}}{\partial(\del_\mu \phi^\dagger)}\,\delta\phi^\dagger \\
+   &= \big(\del^\mu\phi^\dagger\big)\,(-i\theta\,\phi)
+     \;+\; \big(\del^\mu\phi\big)\,(+i\theta\,\phi^\dagger) \\
+   &= i\theta\Big(\phi^\dagger \del^\mu \phi \;-\; (\del^\mu\phi^\dagger)\,\phi\Big).
+\end{align*}
+We can drop the overall factor of $\theta$ (it is just a normalization), to write
+\begin{equation*}
+   J^\mu \;=\; i\Big(\phi^\dagger \del^\mu \phi - (\del^\mu\phi^\dagger)\,\phi\Big).
+\end{equation*}
+To check that this current is conserved, we compute
+\begin{align*}
+   Q \;=\; \int d^3\mathbf{x}\; J^0(\mathbf{x},t)
+   \;=\; i\int d^3\mathbf{x}\;\Big(\phi^\dagger\,\del^0\phi - (\del^0\phi^\dagger)\,\phi\Big).
+\end{align*}
+Classically, $Q$ is a continuous conserved quantity (not quantized a priori).
+In the quantum theory, expand in creation/annihilation operators (with standard normalization) to find
+\begin{align*}
+   Q \;=\; \int \frac{d^3\mathbf{k}}{(2\pi)^3}\,
+        \Big(a_{\mathbf{k}}^\dagger a_{\mathbf{k}} \;-\; b_{\mathbf{k}}^\dagger b_{\mathbf{k}}\Big),
+\end{align*}
+i.e. the number of particles minus antiparticles. Therefore, in the quantum theory
+\begin{equation*}
+   \text{the spectrum of } Q \text{ is \emph{integer}-valued (quantized),}
+\end{equation*}
+because it is the difference of two number operators with integer eigenvalues. (This fixes the unit of charge by the normalization chosen in $J^\mu$.)
+
+\textit{Summary.}
+The massive complex scalar enjoys a global $U(1)$ symmetry $\phi\to e^{-i\theta}\phi$,
+which acts as a rotation by angle $\theta$ on $(\phi_1,\phi_2)$. The associated Noether
+current is
+\begin{equation*}
+   J^\mu \;=\; i\big(\phi^\dagger \del^\mu \phi - (\del^\mu\phi^\dagger)\phi\big)
+   \;=\; \phi_1\,\del^\mu\phi_2 - \phi_2\,\del^\mu\phi_1,
+\end{equation*}
+it is conserved on-shell, and the corresponding charge is continuous classically but becomes
+\emph{quantized} (integer spectrum) in the quantum theory, counting particle number minus antiparticle number.
+
+\end{document}
