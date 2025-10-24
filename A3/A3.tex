@@ -150,7 +150,7 @@ Thus, we have three stationary points: $\phi_c = 0$ and $\phi = \pm
 \sqrt{\frac{-|\lambda_2|}{2\lambda_3}}$. The following plot shows that $\lambda_3 < 0$ is 
 the only case where we have local minima at $\phi = \pm \sqrt{\frac{-|\lambda_2|}{2\lambda_3}}$:
 \begin{center}
-    \includegraphics[width=0.8\textwidth]{fig.png}
+    %\includegraphics[width=0.8\textwidth]{fig.png}
 \end{center}
 In the case where the potential has $\lambda_2\phi^2$ instead of
 $|\lambda_2|\phi^2$, then when $\lambda_2 < 0$ we have a single minimum at $\phi = 0$,
@@ -321,9 +321,9 @@ Using these definitions, we write $\phi$ and $\phi^{\dagger}$
    \left( (\alpha_k - i\beta_k)e^{ik\cdot x} + (\alpha^{\dagger}_k -
    i\beta^{\dagger}_k)e^{-ik\cdot x} \right) \\
 \end{align*}
-let us now define $a = \alpha_k + i\beta_k$ and $b = \alpha_k - i\beta_k$. Then,
-immediately we see $a^{\dagger} = \alpha_k^{\dagger} - i\beta_k^{\dagger}$ and 
-$b^{\dagger} = \alpha_k^{\dagger} + i \beta_k^{\dagger}$ such that
+let us now define $a_k = \alpha_k + i\beta_k$ and $b_k = \alpha_k - i\beta_k$. Then,
+immediately we see $a^{\dagger}_k = \alpha_k^{\dagger} - i\beta_k^{\dagger}$ and 
+$b^{\dagger}_k = \alpha_k^{\dagger} + i \beta_k^{\dagger}$ such that
 
 \begin{align*}
    \phi(x) &= \int \frac{d^3k}{(2\pi)^3} \frac{1}{\sqrt{2\omega_k}} \left(
@@ -400,10 +400,10 @@ describes what this causal effect is.
 
 Next, to find the Hamiltonian, we will need to compute the conjugate momenta
 \begin{align*}
-   \pi(x) &= \frac{\partial \mathcal{L}}{\partial(\del_0 \phi)} = \del^0
+   \pi(x) &= \frac{\partial \mathcal{L}}{\partial(\del_0 \phi)} = \tfrac12\del^0
    \phi^{\dagger} \\
    \pi^{\dagger}(x) &= \frac{\partial \mathcal{L}}{\partial(\del_0
-   \phi^{\dagger})} = \del^0 \phi \\
+   \phi^{\dagger})} = \tfrac12\del^0 \phi \\
 \end{align*}
 then, the Hamiltonian density is given by
 \begin{align*}
@@ -465,38 +465,39 @@ Now, we can find the conserved current using Noether's theorem:
      \;+\; \frac{\partial \mathcal{L}}{\partial(\del_\mu \phi^\dagger)}\,\delta\phi^\dagger \\
    &= \big(\del^\mu\phi^\dagger\big)\,(-i\theta\,\phi)
      \;+\; \big(\del^\mu\phi\big)\,(+i\theta\,\phi^\dagger) \\
-   &= i\theta\Big(\phi^\dagger \del^\mu \phi \;-\; (\del^\mu\phi^\dagger)\,\phi\Big).
+   &= \frac{i\theta}{2}\Big(\phi^\dagger \del^\mu \phi \;-\; (\del^\mu\phi^\dagger)\,\phi\Big).
 \end{align*}
-We can drop the overall factor of $\theta$ (it is just a normalization), to write
-\begin{equation*}
-   J^\mu \;=\; i\Big(\phi^\dagger \del^\mu \phi - (\del^\mu\phi^\dagger)\,\phi\Big).
-\end{equation*}
-To check that this current is conserved, we compute
+Then, the conserved charge $Q$ can be found by integrating the charge density
+over space
 \begin{align*}
-   Q \;=\; \int d^3\mathbf{x}\; J^0(\mathbf{x},t)
-   \;=\; i\int d^3\mathbf{x}\;\Big(\phi^\dagger\,\del^0\phi - (\del^0\phi^\dagger)\,\phi\Big).
+    Q &= \int d^3x J^{0} = \int d^3x \; \frac{i\theta}{2}\Big(\phi^\dagger \del^0 \phi -
+    \del^0\phi^\dagger\phi\Big). \\
+      &= \int d^3x \frac{i\theta}{2} \Big(\phi^{\dagger}\pi^{\dagger} - \pi\phi \Big) \\
 \end{align*}
-Classically, $Q$ is a continuous conserved quantity (not quantized a priori).
-In the quantum theory, expand in creation/annihilation operators (with standard normalization) to find
+Knowing that all of $\phi$, $\pi$ (and their daggered counterparts) are quantized,
+then we can express the charge in terms of their mode expansions. For this we
+can compute $\del^0\phi$ and $\del^0\phi^{\dagger}$. Using 
 \begin{align*}
-   Q \;=\; \int \frac{d^3\mathbf{k}}{(2\pi)^3}\,
-        \Big(a_{\mathbf{k}}^\dagger a_{\mathbf{k}} \;-\; b_{\mathbf{k}}^\dagger b_{\mathbf{k}}\Big),
+    \del^0 c_k e^{-ik\cdot x} &= c_k \del^0 e^{-ik^0x^0 + i\mathbf{k} \cdot \mathbf{x}} \\
+                              &= -i k^0 c_k e^{-ik\cdot x} \\
+                              &= -i \omega_k c_k e^{-ik\cdot x}
 \end{align*}
-i.e. the number of particles minus antiparticles. Therefore, in the quantum theory
+Therefore
+\begin{align*}
+    \tfrac12\del^0\phi &= \pi^{\dagger}(x) = \tfrac12 \int \frac{d^3k}{(2\pi)^3}
+    \frac{1}{\sqrt{2\omega_k}} \Big((i\omega_k) a_k e^{ik\cdot x} +
+    (-i\omega_k) b^{\dagger}_k e^{ik\cdot x} \Big) \\
+                       &= \frac{-i}{2} \int \frac{d^3k}{(2\pi)^3}
+                       \sqrt{\frac{\omega_k}{2}}\Big(a_ke^{-ik\cdot x}
+                           - b^{\dagger}_ke^{ik\cdot x} \Big)
+\end{align*}
+and similarly
 \begin{equation*}
-   \text{the spectrum of } Q \text{ is \emph{integer}-valued (quantized),}
+    \pi(x) = \frac{i}{2} \int \frac{d^3k}{(2\pi)^3} \sqrt{\frac{\omega_k}{2}}
+    \Big(a^{\dagger}_ke^{-ik\cdot x} - b_ke^{ik\cdot x} \Big)
 \end{equation*}
-because it is the difference of two number operators with integer eigenvalues. (This fixes the unit of charge by the normalization chosen in $J^\mu$.)
-
-\textit{Summary.}
-The massive complex scalar enjoys a global $U(1)$ symmetry $\phi\to e^{-i\theta}\phi$,
-which acts as a rotation by angle $\theta$ on $(\phi_1,\phi_2)$. The associated Noether
-current is
-\begin{equation*}
-   J^\mu \;=\; i\big(\phi^\dagger \del^\mu \phi - (\del^\mu\phi^\dagger)\phi\big)
-   \;=\; \phi_1\,\del^\mu\phi_2 - \phi_2\,\del^\mu\phi_1,
-\end{equation*}
-it is conserved on-shell, and the corresponding charge is continuous classically but becomes
-\emph{quantized} (integer spectrum) in the quantum theory, counting particle number minus antiparticle number.
-
+Specifically:
+\begin{align*}
+    \hat{Q} &= \int \frac{d^3xd^3kd^3k'}{(2\pi)^6}
+\end{align*}
 \end{document}
