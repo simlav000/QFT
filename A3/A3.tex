@@ -18,6 +18,7 @@
 \newcommand{\delNu}{\partial^{\nu}}
 \newcommand{\wk}{\omega_{\mathbf{k}}}
 \newcommand{\wkp}{\omega_{\mathbf{k'}}}
+\newcommand{\+}{\dagger}
 \DeclarePairedDelimiter\bra{\langle}{\rvert}
 \DeclarePairedDelimiter\ket{\lvert}{\rangle}
 \DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
@@ -485,8 +486,8 @@ can compute $\del^0\phi$ and $\del^0\phi^{\dagger}$. Using
 Therefore
 \begin{align*}
     \tfrac12\del^0\phi &= \pi^{\dagger}(x) = \tfrac12 \int \frac{d^3k}{(2\pi)^3}
-    \frac{1}{\sqrt{2\omega_k}} \Big((i\omega_k) a_k e^{ik\cdot x} +
-    (-i\omega_k) b^{\dagger}_k e^{ik\cdot x} \Big) \\
+    \frac{1}{\sqrt{2\omega_k}} \Big((-i\omega_k) a_k e^{-ik\cdot x} +
+    (i\omega_k) b^{\dagger}_k e^{ik\cdot x} \Big) \\
                        &= \frac{-i}{2} \int \frac{d^3k}{(2\pi)^3}
                        \sqrt{\frac{\omega_k}{2}}\Big(a_ke^{-ik\cdot x}
                            - b^{\dagger}_ke^{ik\cdot x} \Big)
@@ -494,10 +495,127 @@ Therefore
 and similarly
 \begin{equation*}
     \pi(x) = \frac{i}{2} \int \frac{d^3k}{(2\pi)^3} \sqrt{\frac{\omega_k}{2}}
-    \Big(a^{\dagger}_ke^{-ik\cdot x} - b_ke^{ik\cdot x} \Big)
+    \Big(a^{\dagger}_ke^{ik\cdot x} - b_ke^{-ik\cdot x} \Big)
 \end{equation*}
-Specifically:
+And so the conserved charge is given by
 \begin{align*}
-    \hat{Q} &= \int \frac{d^3xd^3kd^3k'}{(2\pi)^6}
+\hat{Q}
+  &= \frac{i}{4} \!\int\! \frac{d^3x\, d^3k\, d^3k'}{(2\pi)^6}
+     \sqrt{\frac{\omega_{k'}}{\omega_k}}\,
+     \Big[
+       \big(a_{k'}^{\dagger} e^{ik'\cdot x} + b_{k'} e^{-ik'\cdot x}\big)
+       (-i)\big(a_k e^{-ik\cdot x} - b_k^{\dagger} e^{ik\cdot x}\big)
+\\[-0.5em]
+  &\quad\quad\;\;
+       -\big(a_{k'}^{\dagger} e^{ik'\cdot x} - b_{k'} e^{-ik'\cdot x}\big)
+       (i)\big(a_k e^{-ik\cdot x} + b_k^{\dagger} e^{ik\cdot x}\big)
+     \Big] \\
+  &= \frac{1}{4} \!\int\! \frac{d^3x\, d^3k\, d^3k'}{(2\pi)^6}
+     \sqrt{\frac{\omega_{k'}}{\omega_k}}\,
+     \Big[
+     \big(a^{\dagger}_{k'}a_ke^{i(k' - k)\cdot x} -
+         a^{\dagger}_{k'}b^{\dagger}_{k} e^{i(k' + k)\cdot x} + b_{k'}a_k
+         e^{i(k + k')\cdot x} - b_{k'}b^{\dagger}_k e^{-i(k - k')\cdot x} \big)
+\\[-0.5em]
+  &\quad\quad\;\;
+       + \big(a^{\dagger}_{k'}a_ke^{-i(k' - k)\cdot x} +
+         a^{\dagger}_{k'}b^{\dagger}_{k} e^{-i(k' + k)\cdot x} - b_{k'}a_k
+         e^{i(k' + k)\cdot x} - b_{k'}b^{\dagger}_k e^{-i(k - k')\cdot x} \big)
+     \Big]
+\end{align*}
+
+We now carry out the spatial integral. Each exponential gives either 
+$e^{i(\mathbf{k}'-\mathbf{k})\cdot\mathbf{x}}$ or 
+$e^{i(\mathbf{k}'+\mathbf{k})\cdot\mathbf{x}}$, so
+
+\[
+\int d^3x\, e^{i(\mathbf{k}'-\mathbf{k})\cdot\mathbf{x}} = (2\pi)^3\delta^{(3)}(\mathbf{k}'-\mathbf{k}),
+\qquad
+\int d^3x\, e^{i(\mathbf{k}'+\mathbf{k})\cdot\mathbf{x}} = (2\pi)^3\delta^{(3)}(\mathbf{k}'+\mathbf{k}).
+\]
+\begin{align*}
+\hat{Q}
+  &= \frac{1}{4} \!\int\! \frac{d^3x\, d^3k\, d^3k'}{(2\pi)^6}
+     \sqrt{\frac{\omega_{k'}}{\omega_k}}\,
+     \Big[
+     \big(a^{\dagger}_{k}a_k - a^{\dagger}_{-k}b^{\dagger}_{k} + b_{-k}a_k -
+     b_{k}b^{\dagger}_k \big)
+\\[-0.5em]
+  &\quad\quad\;\;
+       + \big(a^{\dagger}_{k}a_k + a^{\dagger}_{-k}b^{\dagger}_{k} - b_{-k}a_k
+       - b_{k}b^{\dagger}_k  \big)
+     \Big] \\
+&= \frac{1}{4}\!\int\!\frac{d^3k}{(2\pi)^3}
+\Big[
+    2a_{k}^{\dagger} a_k  - 2b_kb^{\dagger}_k
+\Big] \\
+&= \frac{1}{2}\!\int\!\frac{d^3k}{(2\pi)^3}
+\Big(
+    a_{k}^{\dagger} a_k  - b_kb^{\dagger}_k
+\Big).
+\end{align*}
+Using $b_k b_k^{\dagger} = b_k^{\dagger}b_k + (2\pi)^3\delta^{(3)}(0)$, we
+normal order and drop the infinite constant.
+\[
+:\hat{Q}: = \frac{1}{2} \int\!\frac{d^3k}{(2\pi)^3}\,
+\big(a_k^{\dagger}a_k - b_k^{\dagger}b_k\big).
+\]
+Thus the conserved charge counts particles minus antiparticles.
+
+Now, if the rotational angle is space dependent $\theta = \theta(x)$, we see
+that the Lagrangian is no longer invariant under $\phi \to e^{-i\theta(x)}\phi$
+because the first term
+\begin{align*}
+    \delmu\phi\delMu\phi^{\dagger} &\to
+    \delmu(e^{-i\theta(x)}\phi)\delMu(e^{i\theta(x)}\phi) \\ 
+                                   &=
+    \big(-i\delmu\theta(x)e^{-i\theta(x)}\phi + e^{-i\theta(x)}\delmu\phi \big)
+    \big(i\delmu\theta(x)e^{i\theta(x)}\phi^{\dagger} +
+    e^{i\theta(x)}\delmu\phi^{\dagger} \big) \\
+                                   &=
+    \big(
+        (\delmu\theta)^2\phi\phi^{\+} -i\delmu\theta\phi\delmu\phi^{\+}
+        + i\delmu\phi\delmu\theta\phi^{\+} + \delmu\phi\delmu\phi^{\+}
+    \big)
+\end{align*}
+For a small angle change, we can ignore the $(\delmu\theta)^2$ term, leaving us
+with our new Lagrangian:
+\begin{equation*}
+    \mathcal{L'} = 
+    \frac{1}{2}\delmu\phi\delmu\phi^{\+} -
+    \frac{i}{2}\delmu\theta(\phi\delmu\phi^{\+} - \delmu\phi\phi^{\+})
+    - \frac{1}{2}m^2\phi\phi^{\+}
+\end{equation*}
+Which is obviously different than prior to the transformation. Recalling that 
+the conserved current for the global gauge transformation was $J^{\mu} =
+\frac{i}{2}\big(\phi^{\+}\delmu\phi - \delmu\phi^{\+}\phi\big)$, we can 
+read off that the variation in the Lagrangian is
+\begin{align*}
+    \delta\mathal{L} &= \mathcal{L'} - \mathcal{L} = 
+    - \frac{i}{2}\delmu\theta(\phi\delmu\phi^{\+} - \delmu\phi\phi^{\+}) \\
+                     &= \delmu\theta J^{\mu}
+\end{align*}
+as desired.
+
+To show how the current is not invariant, take:
+\begin{align*}
+    J'^{\mu} &\to \frac{i}{2}\big(e^{-i\theta(x)}\phi \delmu
+    (e^{i\theta(x)}\phi^{\+}) - \delmu (e^{-i\theta(x)}\phi)e^{i\theta(x)}\phi^{\+} \big) \\
+            &= \frac{i}{2} \big(
+                e^{-i\theta(x)}\phi(i\delmu\theta(x)e^{i\theta(x)}\phi^{\+} + 
+                e^{i\theta(x)}\delmu\phi^{\+}) -
+                (-i\delmu\theta(x)e^{-i\theta(x)}\phi +
+                e^{-i\theta(x)}\delmu\phi)e^{i\theta(x)}\phi^{\+}
+            \big) \\
+            &= \frac{i}{2} \big(
+                i\delmu\theta\phi\phi^{\+} + \phi\delmu\phi^{\+} +
+                i\delmu\theta\phi\phi^{\+} - \delmu\phi\phi^{\+}
+            \big) \\
+            &= \frac{i}{2}\big(\phi\delmu\phi^{\+} - \delmu\phi\phi^{\+}\big) 
+            - |\phi|^2\delmu\theta \\
+\end{align*}
+Such that
+\begin{align*}
+    \delta J^{\mu} &= |\phi|^2\delmu\theta
 \end{align*}
 \end{document}
