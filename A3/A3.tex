@@ -591,7 +591,7 @@ the conserved current for the global gauge transformation was $J^{\mu} =
 \frac{i}{2}\big(\phi^{\+}\delmu\phi - \delmu\phi^{\+}\phi\big)$, we can 
 read off that the variation in the Lagrangian is
 \begin{align*}
-    \delta\mathal{L} &= \mathcal{L'} - \mathcal{L} = 
+    \delta\mathcal{L} &= \mathcal{L'} - \mathcal{L} = 
     - \frac{i}{2}\delmu\theta(\phi\delmu\phi^{\+} - \delmu\phi\phi^{\+}) \\
                      &= \delmu\theta J^{\mu}
 \end{align*}
@@ -618,4 +618,77 @@ Such that
 \begin{align*}
     \delta J^{\mu} &= |\phi|^2\delmu\theta
 \end{align*}
+Now, let us consider the same transformation $\phi \to e^{-i\theta(x)}\phi$ but with our 
+modified Lagrangian
+\begin{align*}
+    \mathcal{L} &= \frac{1}{2}\delmu\phi^{\+}\delMu\phi - eJ^{\mu}A_{\mu} + \frac{e^2}{2}
+    |\phi|^2A_{\mu}A^{\mu} - \frac{1}{2}m^2\phi^{\+}\phi  \\
+\end{align*}
+Then the variation in the Lagrangian is
+\begin{align*}
+    \delta\mathcal{L} &= \delta \mathcal{L}_{\text{old}} + \delta \mathcal{L}_{\text{new}} \\
+    &= \delmu\theta  J^{\mu} - e \delta J^{\mu} A_{\mu} - e J^{\mu} \delta A_{\mu} + 
+    \frac{e^2}{2} |\phi|^2 \delta A_{\mu}A^{\mu} + \frac{e^2}{2} |\phi|^2 A_{\mu} \delta A^{\mu} \\
+    &= \delmu\theta  J^{\mu} - e (|\phi|^2 \delmu\theta) A_{\mu} - e J^{\mu} \delta A_{\mu} + 
+    e^2 |\phi|^2 \delta A_{\mu}A^{\mu} \\
+    &= \delmu\theta \big(J^{\mu} -e|\phi|^2 A^{\mu} \big) - \big(eJ^{\mu} - e^2
+    |\phi|^2 A^{\mu} \big) \delta A_{\mu} \\
+    &= \delmu\theta \big(J^{\mu} -e|\phi|^2 A^{\mu} \big) - \big(eJ^{\mu} - e^2
+    |\phi|^2 A^{\mu} \big) \Big(\frac{1}{e} \delmu\theta  \Big) \\
+    &= \delmu\theta \big(J^{\mu} -e|\phi|^2 A^{\mu} \big) - \delmu\theta\big(J^{\mu} - e
+    |\phi|^2 A^{\mu} \big)\\
+    &= 0
+\end{align*}
+and so we see that if we choose $\delta A_{\mu} = \frac{1}{e}\delmu\theta$, then
+the variation in the Lagrangian is zero, and thus the Lagrangian is invariant
+under the local gauge transformation.
+
+To verify the kinetic term for the gauge field is also invariant, we note that,  using
+the result above, $A_{\mu}$ transforms as $A_{\mu} \to A_{\mu}' = A_{\mu} +
+\frac{1}{e}\delmu\theta$. Therefore:
+\begin{align*}
+    \delmu A_{\nu}  -  \delnu A_{\mu} &\to  \delmu (A_{\nu} + \frac{1}{e}\delnu\theta) -
+    \delnu (A_{\mu} + \frac{1}{e}\delmu\theta) \\
+    &= \delmu A_{\nu} - \delnu A_{\mu} + \frac{1}{e}(\delmu\delnu\theta - \delnu\delmu\theta) \\
+    &= \delmu A_{\nu} - \delnu A_{\mu} \\
+\end{align*}
+since partial derivatives commute. Thus the kinetic term for the gauge field is invariant. Specifically,
+if $\left(\delmu A_{\nu}  -  \delnu A_{\mu}\right)$ is invariant, then so is 
+$\left(\delmu A_{\nu}  -  \delnu A_{\mu}\right)^2$.
+
+Meanwhile, if we have some mass term such as $\frac{1}{2}m^2 A_{\mu}A^{\mu}$,
+then under the gauge transformation
+\begin{align*}
+    A_{\mu}A^{\mu} &\to (A_{\mu} + \frac{1}{e}\delmu\theta)(A^{\mu} +
+    \frac{1}{e}\delmu\theta) \\
+                   &= A_{\mu}A^{\mu} + \frac{2}{e}A^{\mu}\delmu\theta +
+                   \frac{1}{e^2}(\delmu\theta)^2 \\
+\end{align*}
+which is not equal to the original term, and so the mass term is not gauge invariant.
+
+Now, let us introduce the covariant derivative $D_{\mu} = \delmu - ieA_{\mu}$. Then,
+under the gauge transformation, we have
+\begin{align*}
+    D_{\mu}\phi &= (\delmu - ieA_{\mu})\phi \\
+                &\to (\delmu - ie(A_{\mu} + e^{-1}\delmu\theta))e^{-i\theta}\phi \\
+                &= \delmu(e^{-i\theta}\phi) - ieA_{\mu}e^{-i\theta}\phi - i\delmu\theta e^{-i\theta}\phi \\
+                &= i\delmu\theta e^{-i\theta}\phi + e^{-i\theta}\delmu\phi -
+                ieA_{\mu}e^{-i\theta}\phi - i\delmu\theta e^{-i\theta}\phi \\
+                &=  e^{-i\theta}\delmu\phi - ieA_{\mu}e^{-i\theta}\phi \\
+                &=  \big(\delmu\phi - ieA_{\mu}\phi \big)e^{-i\theta}\phi \\
+                &=  e^{-i\theta}D_{\mu}\phi \\
+\end{align*}
+Thus, the covariant derivative of $\phi$ transforms in the same way as $\phi$ and not
+as its derivative.
+
+Finally, to write the QED Lagrangian using the covariant derivative, we start with
+a well known definition for the electromagnetic field strength tensor:
+\begin{equation*}
+    F_{\mu\nu} = \delmu A_{\nu} - \delnu A_{\mu}
+\end{equation*}
+Then, the QED Lagrangian can be written as
+\begin{equation*}
+    \mathcal{L}_{\text{QED}} = \frac{1}{2}(D_{\mu}\phi)(D^{\mu}\phi^{\dagger}) -
+    \frac{1}{2}m^2\phi\phi^{\dagger} - \frac{1}{4}F_{\mu\nu}F^{\mu\nu}
+\end{equation*}
 \end{document}
