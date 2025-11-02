@@ -612,7 +612,7 @@ To show how the current is not invariant, take:
                 i\delmu\theta\phi\phi^{\+} - \delmu\phi\phi^{\+}
             \big) \\
             &= \frac{i}{2}\big(\phi\delmu\phi^{\+} - \delmu\phi\phi^{\+}\big) 
-            - |\phi|^2\delmu\theta \\
+            + |\phi|^2\delmu\theta \\
 \end{align*}
 Such that
 \begin{align*}
@@ -691,4 +691,188 @@ Then, the QED Lagrangian can be written as
     \mathcal{L}_{\text{QED}} = \frac{1}{2}(D_{\mu}\phi)(D^{\mu}\phi^{\dagger}) -
     \frac{1}{2}m^2\phi\phi^{\dagger} - \frac{1}{4}F_{\mu\nu}F^{\mu\nu}
 \end{equation*}
+
+\section*{Question 4: Quantum field theory in 2 + 1 dimensions}
+
+We start from the free real scalar field action in $(2+1)$ dimensions:
+\begin{equation}
+S[\phi] = \frac{1}{2}\int \! d^3x \, 
+    \big( \partial_\mu \phi \, \partial^\mu \phi - m^2 \phi^2 \big).
+    \label{eq:action}
+\end{equation}
+The corresponding Euler--Lagrange equation is the Klein-Gordon equation:
+\begin{equation}
+    (\partial_t^2 - \nabla^2 + m^2)\,\phi = 0.
+    \label{eq:KG}
+\end{equation}
+
+For the two dimensional square sheet (Surface A), which I will define to have
+the bottom left corner at $(0, 0)$ and length $L$, we have boundary conditions
+$\phi(x = 0) = \phi(x = L) = \phi(y = 0) = \phi(y = L) = 0$.
+The Laplacian eigenfunctions satisfying these boundary conditions are separable:
+\[
+    \phi(t,x,y) = f(t)\, \sin(p_x x)\, \sin(p_y y),
+\]
+where $p_x$ and $p_y$ are quantized by the boundary conditions. Imposing
+$\sin(p_x L)=0$ and $\sin(p_y L)=0$ gives
+\begin{equation}
+p_x = \frac{m\pi}{L}, 
+\qquad
+p_y = \frac{n\pi}{L},
+\qquad
+m,n \in \mathbb{Z}.
+\label{eq:pxpy}
+\end{equation}
+Substituting the separable ansatz
+\[
+\phi(t,x,y) = f(t)\,\sin(p_x x)\,\sin(p_y y)
+\]
+into the Klein--Gordon equation \eqref{eq:KG},
+\[
+(\partial_t^2 - \nabla^2 + m^2)\phi = 0,
+\]
+we evaluate each term separately.
+\[
+\partial_t^2 \phi = \ddot{f}(t)\,\sin(p_x x)\,\sin(p_y y).
+\]
+\[
+\nabla^2 \phi 
+= \left(\frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2}\right)
+  \big[f(t)\sin(p_x x)\sin(p_y y)\big]
+= -f(t)\,(p_x^2 + p_y^2)\,\sin(p_x x)\,\sin(p_y y),
+\]
+Putting everything together:
+\[
+(\partial_t^2 - \nabla^2 + m^2)\phi
+= \Big[\ddot{f}(t) + (p_x^2 + p_y^2 + m^2)f(t)\Big]
+   \sin(p_x x)\sin(p_y y).
+\]
+
+For the equation to hold for all \(x,y\), the prefactor of the sine functions
+must vanish, giving the ordinary differential equation
+\[
+\ddot{f}(t) + \w_p^2 f(t) = 0,
+\]
+with
+\begin{equation}
+\w_p^2 = p_x^2 + p_y^2 + m^2.
+\label{eq:freq}
+\end{equation}
+The general solution of this ordinary differential equation is
+\begin{equation}
+f(t) = a_p e^{-i\w_p t} + b_p e^{+i\w_p t}.
+\label{eq:ft}
+\end{equation}
+
+Putting the spatial and temporal parts together, the complete field can be
+written as a double sum over discrete momentum modes:
+\begin{equation}
+\phi(t,x,y) = \sum_{m,n} \sin(p_x x)\sin(p_y y) \big( a_p e^{-i\w_p t}
++ b_p e^{+i\w_p t} \big),
+\label{eq:modeexp}
+\end{equation}
+Since we want $\phi = \phi^{\dagger}$, then we find that $b_p =
+a_p^{\dagger}$
+
+Next, we require that $[\phi(x), \pi(y)] = i\delta^2(x - y)$ and so we 
+must compute $\pi(y)$. This is given by
+\begin{align*}
+    \pi(y) &= \frac{\mathcal{L}}{\del_0\phi} = \del_0\phi \\
+           &= \sum_{m,n} \sin(p_x x)\sin(p_y y) \big((-i\w_p)
+               a_p e^{-i\w_p t} +
+               (i\w_p)a_p^{\dagger}e^{+i\w_p t}
+       \big) \\
+           &= -i \sum_{m,n} \w_p \sin(p_x x)\sin(p_y y) \big(
+               a_p e^{-i\w_p t} - a_p^{\dagger}e^{+i\w_p t}
+       \big)
+\end{align*}
+Now, we compute the commutator. Let us first define $u_n(x) =
+\sin\left(\frac{n\pi x}{L}\right)$. Then:
+\begin{align*}
+    [\phi(x), \pi(y)] &= -i \sum_{m,n} \sum_{j,k} \w_q u_n(x) u_m(y)
+    u_j(x') u_k(y') \Big((a_p e^{-i\w_p t} +
+        a_p^{\+} e^{i\w_p t})(a_q e^{-i\w_q t} -
+        a_q^{\+} e^{i\w_q t})\Big) \\[1em]
+    &\quad
+    + i \sum_{m,n} \sum_{j,k} \w_q u_n(x) u_m(y) u_j(x') u_k(y')
+    \Big((a_q e^{-i\w_q t} - a_q^{\+} e^{i\w_q
+    t})(a_p e^{-i\w_p t} + a_p^{\+} e^{i\w_p t})\Big) \\
+    &= 
+    i \sum_{m,n} \sum_{j,k} \w_q u_n(x) u_m(y) u_j(x') u_k(y') \times
+    \Big(
+        (a_q e^{-i\w_q t} - a_q^{\+} e^{i\w_q t})
+        (a_p e^{-i\w_p t} + a_p^{\+} e^{i\w_p t}) - \\[1em]
+    &\quad
+        (a_p e^{-i\w_p t} + a_p^{\+} e^{i\w_p t})
+        (a_q e^{-i\w_q t} - a_q^{\+} e^{i\w_q t})
+    \Big) \\
+    &= i \sum_{m,n} \sum_{j,k} \w_q u_n(x) u_m(y) u_j(x') u_k(y') \Big(
+        (a_qa_p e^{-i\w_qt} e^{-i\w_p t} - a_pa_q
+        e^{-i\w_pt} e^{-i\w_q t}) +  \\[1em]
+    &\quad
+        (a_qa_p^{\+} e^{-i\w_q t} e^{i\w_p t} - 
+        a_p^{\+}a_q e^{i\w_p t} e^{-i\w_q t}) - 
+        (a_pa_q^{\+} e^{-i\w_p t} e^{i\w_q t} -
+        a_q^{\+}a_p e^{i\w_q t} e^{-i\w_p t} ) + \\[1em]
+    &\quad
+        (a_q^{\+}a_p^{\+} e^{i\w_q t} e^{-i\w_p t} -
+        a_q^{\+}a_p^{\+} e^{i\w_q t} e^{-i\w_p t})
+    \Big) \\
+    &= i \sum_{m,n} \sum_{j,k} \w_q u_n(x) u_m(y) u_j(x') u_k(y') \Big(
+        [a_q, a_p]e^{-it(\w_q + \w_p)} + [a_q,
+        a_p^{\+}]e^{-it(\w_q - \w_p)} - \\[1em]
+    &\quad
+        [a_p, a_q^{\+}] e^{-it(\w_p - \w_q)} +
+        [a_q^{\+}, a_p^{\+}] e^{-it(\w_p - \w_q)}
+    \Big)
+\end{align*}
+And using $[a_q, a_q] = [a_q^{\+}, a_p^{\+}] = 0$ 
+\begin{align*}
+    [\phi(t,\mathbf{x}),\pi(t,\mathbf{x}')]
+    &= i \sum_{m,n}\sum_{j,k} \w_{jk}\,
+    u_n(x)u_m(y)u_j(x')u_k(y') \\
+    &\qquad\times\Big([a_{jk},a_{mn}^\dagger]\,e^{-i(\w_{jk}-\w_{mn})t}
+    -[a_{mn},a_{jk}^\dagger]\,e^{-i(\w_{mn}-\w_{jk})t}\Big) \\
+    &= i \sum_{m,n} 2\,\w_{mn}\,C_{mn}\,
+    u_n(x)u_n(x')\,u_m(y)u_m(y')
+\end{align*}
+where we have set
+\[
+[a_{mn},a_{m'n'}^\dagger]=C_{mn}\,\delta_{mm'}\delta_{nn'}
+\]
+so that the phases cancel when $m=m',\,n=n'$ and the two mixed terms contribute equally.
+
+Using completeness twice,
+\[
+\sum_{n=1}^\infty u_n(x)u_n(x')=\frac{L}{2}\delta(x-x'),
+\qquad
+\sum_{m=1}^\infty u_m(y)u_m(y')=\frac{L}{2}\delta(y-y'),
+\]
+we obtain
+\[
+[\phi(t,\mathbf{x}),\pi(t,\mathbf{x}')]
+= i\,(L/2)^2\!\left(\sum_{m,n} 2\,\w_{mn}\,C_{mn}\right)\delta(x-x')\delta(y-y').
+\]
+Imposing the canonical equal-time commutator on the box,
+\[
+[\phi(t,\mathbf{x}),\pi(t,\mathbf{x}')]=i\,\delta(x-x')\delta(y-y'),
+\]
+forces the coefficient of $\delta(x-x')\delta(y-y')$ to be $1$ \emph{mode by mode}. Hence
+\[
+2\,\w_{mn}\,C_{mn}=\frac{1}{(L/2)^2}
+\quad\Longrightarrow\quad
+C_{mn}=\frac{1}{(L/2)^2\,2\,\w_{mn}}.
+\]
+Equivalently, if we define rescaled mode operators
+\[
+\tilde{a}_{mn}\;\equiv\;(L/2)\,\sqrt{2\,\w_{mn}}\;a_{mn},
+\]
+then their algebra is
+\[
+[\tilde{a}_{mn},\tilde{a}_{m'n'}^{\dagger}]
+=(L/2)^2\,(2\,\w_{mn})\,\delta_{mm'}\delta_{nn'},
+\]
+
+Now, for the cylinder, the same boundary exist for for $\phi(y = 0) = \phi(y =
+L) = 0$ but now we impose instead $\phi(x = 0) = \phi(x = L)$
 \end{document}
