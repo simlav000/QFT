@@ -693,7 +693,7 @@ Then, the QED Lagrangian can be written as
 \end{equation*}
 
 \section*{Question 4: Quantum field theory in 2 + 1 dimensions}
-
+\subsection*{Computing the mode expansions}
 We start from the free real scalar field action in $(2+1)$ dimensions:
 \begin{equation}
 S[\phi] = \frac{1}{2}\int \! d^3x \, 
@@ -706,6 +706,7 @@ The corresponding Euler--Lagrange equation is the Klein-Gordon equation:
     \label{eq:KG}
 \end{equation}
 
+\subsubsection*{Plane}
 For the two dimensional square sheet (Surface A), which I will define to have
 the bottom left corner at $(0, 0)$ and length $L$, we have boundary conditions
 $\phi(x = 0) = \phi(x = L) = \phi(y = 0) = \phi(y = L) = 0$.
@@ -857,7 +858,7 @@ Imposing the canonical equal-time commutator on the box,
 \[
 [\phi(t,\mathbf{x}),\pi(t,\mathbf{x}')]=i\,\delta(x-x')\delta(y-y'),
 \]
-forces the coefficient of $\delta(x-x')\delta(y-y')$ to be $1$ \emph{mode by mode}. Hence
+forces the coefficient of $\delta(x-x')\delta(y-y')$ to be $1$ mode by mode. Hence
 \[
 2\,\w_{mn}\,C_{mn}=\frac{1}{(L/2)^2}
 \quad\Longrightarrow\quad
@@ -872,9 +873,309 @@ then their algebra is
 [\tilde{a}_{mn},\tilde{a}_{m'n'}^{\dagger}]
 =(L/2)^2\,(2\,\w_{mn})\,\delta_{mm'}\delta_{nn'},
 \]
+and the normalized mode expansion is
+\[
+\phi(t,x,y)=\sum_{m,n} \frac{1}{(L/2)\sqrt{2\,\w_{mn}}}\,\sin(p_x x)\sin(p_y y)
+\Big(\tilde{a}_{mn}\,e^{-i\w_{mn}t}+\tilde{a}_{mn}^{\dagger}\,e^{+i\w_{mn}t}\Big).
+\]
 
+\subsubsection*{Cylinder}
 Now, for the cylinder, the same boundary exist for for $\phi(y = 0) = \phi(y =
-L) = 0$ but now we impose instead $\phi(x = 0) = \phi(x = L)$
+L) = 0$ but now we impose instead $\phi(x = 0) = \phi(x = 2\pi R)$
+
+A convenient separable basis is
+\[
+u_{m}(x)=e^{i p_x x},\qquad p_x=\frac{m}{R},\quad m\in\mathbb{Z},\qquad
+v_{n}(y)=\sin\!\Big(\frac{n\pi y}{L}\Big),\quad n\in\mathbb{Z}_+.
+\]
+These obey the orthogonality/completeness relations
+\begin{align*}
+\int_0^{2\pi R}\!dx\,e^{i(p_x-p_x')x}&=2\pi R\,\delta_{m,m'},\\
+\int_0^{L}\!dy\,\sin\!\Big(\frac{n\pi y}{L}\Big)\sin\!\Big(\frac{n'\pi y}{L}\Big)
+&=\frac{L}{2}\,\delta_{n,n'},\\
+\sum_{m\in\mathbb{Z}}\frac{e^{i m(x-x')/R}}{2\pi R}&=\delta(x-x'),\qquad
+\sum_{n=1}^\infty \frac{2}{L}\,\sin\!\Big(\frac{n\pi y}{L}\Big)\sin\!\Big(\frac{n\pi y'}{L}\Big)=\delta(y-y').
+\end{align*}
+
+As we saw for the sheet, plug a separable ansatz into the Klein-Gordon equation. With
+\[
+\phi(t,x,y)=f_{mn}(t)\,u_m(x)\,v_n(y),
+\]
+one finds the same oscillator equation
+\[
+\ddot f_{mn}(t)+\omega_{mn}^2 f_{mn}(t)=0,\qquad 
+\omega_{mn}^2=p_x^2+p_y^2+m^2=\Big(\frac{m}{R}\Big)^2+\Big(\frac{n\pi}{L}\Big)^2+m^2,
+\]
+so
+\[
+f_{mn}(t)=\beta_{mn}\,e^{-i\omega_{mn}t}+\beta_{mn}^{\dagger}\,e^{+i\omega_{mn}t}.
+\]
+Reality of the field enforces the usual relation between opposite momenta. With
+the current basis it is convenient to keep $\beta_{mn}$ and $\beta_{mn}^\dagger$
+and let the commutator fix the normalization.
+
+Thus the mode expansion is
+\begin{equation}
+\phi(t,x,y)=\sum_{m\in\mathbb{Z}}\sum_{n=1}^{\infty} 
+v_n(y)\Big(\beta_{mn}\,e^{-i(\omega_{mn}t-p_x x)}+\beta_{mn}^{\dagger}\,e^{+i(\omega_{mn}t-p_x x)}\Big).
+\label{eq:cyl-mode-raw}
+\end{equation}
+
+The canonical momentum is $\pi=\partial_t\phi$, so
+\[
+\pi(t,x,y)=\sum_{m,n} v_n(y)\Big(-i\omega_{mn}\,\beta_{mn}\,e^{-i(\omega_{mn}t-p_x x)}+i\omega_{mn}\,\beta_{mn}^{\dagger}\,e^{+i(\omega_{mn}t-p_x x)}\Big).
+\]
+Again, impose
+\[
+[\phi(t,\mathbf{x}),\pi(t,\mathbf{x}')]=i\,\delta(x-x')\delta(y-y').
+\]
+\begin{align*}
+[\phi(t,x,y),\pi(t,x',y')]
+&=\sum_{m,n}\sum_{r,s}
+\sin\!\Big(\frac{n\pi y}{L}\Big)\sin\!\Big(\frac{s\pi y'}{L}\Big)\\
+&\quad\times\Big(
+\;\;(+i\omega_{rs})\,e^{-i(p_m x-p_r x')}\,[\beta_{mn},\beta_{rs}^{\dagger}]
+\;+\;(-i\omega_{rs})\,e^{+i(p_m x-p_r x')}\,[\beta_{mn}^{\dagger},\beta_{rs}]
+\Big).
+\end{align*}
+
+Now use the standard completeness relations on the cylinder:
+\[
+\sum_{m\in\mathbb{Z}} e^{+ip_m\Delta x}=2\pi R\,\delta(\Delta x),\qquad
+\sum_{n=1}^{\infty}\sin\!\Big(\frac{n\pi y}{L}\Big)\sin\!\Big(\frac{n\pi y'}{L}\Big)=\frac{L}{2}\,\delta(y-y').
+\]
+
+thus,
+\begin{align*}
+[\phi(t,x,y),\pi(t,x',y')]
+&=i\,(2\pi R)\,(L/2)\sum_{m,n}\omega_{mn}\,[\beta_{mn},\beta_{mn}^{\dagger}]\,\delta(x-x')\delta(y-y').
+\end{align*}
+
+This alone only constrains the sum over modes. To get each mode separately, 
+Multiply both sides of the above by
+\[
+\frac{1}{(2\pi R)}\int_{0}^{2\pi R}\!dx\,e^{-i p_\ell x}\,
+\frac{2}{L}\int_{0}^{L}\!dy\,\sin\!\Big(\frac{n'\pi y}{L}\Big)\;
+\frac{1}{(2\pi R)}\int_{0}^{2\pi R}\!dx'\,e^{+i p_\ell x'}\,
+\frac{2}{L}\int_{0}^{L}\!dy'\,\sin\!\Big(\frac{n'\pi y'}{L}\Big)
+\]
+And use completeness/orthogonality on the cylinder again.
+The left-hand side (from the canonical commutator \(i\,\delta(x-x')\delta(y-y')\))
+cancels with the deltas on the RHS and leaves just.
+\(i\).  The right-hand side collapses the double sum to the single \((\ell,n')\)
+mode and produces the extra  factor of \(2\) coming from \(\partial_t\) (i.e.
+the \(\beta\beta^\dagger-\beta^\dagger\beta\) pair):
+\[
+i \;\;=\;\; i\,(2\pi R)\Big(\frac{L}{2}\Big)\,\big(2\,\omega_{\ell n'}\big)\,
+[\beta_{\ell n'},\beta_{\ell n'}^{\dagger}]\,.
+\]
+Therefore,
+\[
+[\beta_{mn},\beta_{m'n'}^{\dagger}]
+=\frac{1}{(2\pi R)\,(L/2)\,(2\,\omega_{mn})}\;
+\delta_{m m'}\delta_{n n'}
+=\frac{1}{2\pi R\,L\,\omega_{mn}}\;\delta_{m m'}\delta_{n n'}\,,
+\]
+and
+\[
+[\beta_{mn},\beta_{m'n'}]=[\beta_{mn}^{\dagger},\beta_{m'n'}^{\dagger}]=0.
+\]
+Defining
+\[
+b_{mn}\;\equiv\;\frac{\beta_{mn}}{\sqrt{2\pi R\,L\,\omega_{mn}}}\,,
+\qquad
+b_{mn}^\dagger\;\equiv\;\frac{\beta_{mn}^\dagger}{\sqrt{2\pi R\,L\,\omega_{mn}}}\,,
+\]
+one immediately finds
+\[
+[b_{mn},b_{m'n'}^\dagger]=\delta_{m m'}\delta_{n n'}\,,
+\]
+and the standard normalized mode expansion for \(\phi\).
+\begin{equation}
+\phi(t,x,y)=\frac{1}{\sqrt{\pi R L}}\sum_{m\in\mathbb{Z}}\sum_{n=1}^{\infty}
+\frac{\sin\!\big(\tfrac{n\pi y}{L}\big)}{\sqrt{2\omega_{mn}}}
+\Big( b_{mn}\,e^{-i(\omega_{mn}t-p_x x)}+b_{mn}^{\dagger}\,e^{+i(\omega_{mn}t-p_x x)}\Big),
+\label{eq:cyl-mode-final}
+\end{equation}
+
+\subsubsection*{Torus}
+Finally, for the torus, we impose periodic boundary conditions in both directions.
+\[
+\phi(t,x+2\pi R_x,y)=\phi(t,x,y),\qquad
+\phi(t,x,y+2\pi R_y)=\phi(t,x,y).
+\]
+Use the separable plane-wave basis
+\[
+u_m(x)=e^{i p_x x},\quad p_x=\frac{m}{R_x},\quad m\in\mathbb{Z},\qquad
+v_n(y)=e^{i p_y y},\quad p_y=\frac{n}{R_y},\quad n\in\mathbb{Z}.
+\]
+Orthogonality/completeness:
+\begin{align*}
+\int_0^{2\pi R_x}\!dx\,e^{i(p_x-p_x')x}&=2\pi R_x\,\delta_{m,m'},&
+\sum_{m\in\mathbb{Z}}\frac{e^{i m(x-x')/R_x}}{2\pi R_x}&=\delta(x-x'),\\
+\int_0^{2\pi R_y}\!dy\,e^{i(p_y-p_y')y}&=2\pi R_y\,\delta_{n,n'},&
+\sum_{n\in\mathbb{Z}}\frac{e^{i n(y-y')/R_y}}{2\pi R_y}&=\delta(y-y').
+\end{align*}
+
+As before, with the ansatz $\phi(t,x,y)=f_{mn}(t)\,u_m(x)\,v_n(y)$, the Klein–Gordon equation
+\[
+(\partial_t^2-\nabla^2+m^2)\phi=0
+\]
+yields
+\[
+\ddot f_{mn}(t)+\omega_{mn}^2 f_{mn}(t)=0,\qquad
+\omega_{mn}^2=p_x^2+p_y^2+m^2=\Big(\frac{m}{R_x}\Big)^2+\Big(\frac{n}{R_y}\Big)^2+m^2,
+\]
+so
+\[
+f_{mn}(t)=\beta_{mn}\,e^{-i\omega_{mn}t}+\beta_{mn}^\dagger\,e^{+i\omega_{mn}t}.
+\]
+(Reality implies $\beta_{mn}^\dagger=\beta_{-m,-n}$; we keep
+$\beta,\beta^\dagger$ and let the commutator fix the normalization.)
+
+Thus the mode expansion is
+\begin{equation}
+\phi(t,x,y)=\sum_{m,n\in\mathbb{Z}}
+\Big(\beta_{mn}\,e^{-i(\omega_{mn}t-p_x x-p_y y)}+\beta_{mn}^{\dagger}\,e^{+i(\omega_{mn}t-p_x x+p_y y)}\Big),
+\label{eq:torus-phi-raw}
+\end{equation}
+and $\pi=\partial_t\phi$,
+\[
+\pi(t,x,y)=\sum_{m,n}
+\Big(-i\omega_{mn}\beta_{mn}\,e^{-i(\omega_{mn}t-p_x x-p_y y)}
++i\omega_{mn}\beta_{mn}^{\dagger}\,e^{+i(\omega_{mn}t-p_x x+p_y y)}\Big).
+\]
+
+Again, impose
+\[
+[\phi(t,\mathbf{x}),\pi(t,\mathbf{x}')]=i\,\delta(x-x')\delta(y-y').
+\]
+A direct computation gives, using the periodic completeness,
+\[
+[\phi(t,x,y),\pi(t,x',y')]
+=i\,(2\pi R_x)\,(2\pi R_y)\sum_{m,n}\omega_{mn}\,[\beta_{mn},\beta_{mn}^{\dagger}]\,\delta(x-x')\delta(y-y').
+\]
+To isolate a single mode $(\ell,k)$, multiply both sides by
+\[
+\frac{1}{2\pi R_x}\!\int_0^{2\pi R_x}\!dx\,e^{-ip_\ell x}\;
+\frac{1}{2\pi R_y}\!\int_0^{2\pi R_y}\!dy\,e^{-iq_k y}\;
+\frac{1}{2\pi R_x}\!\int_0^{2\pi R_x}\!dx'\,e^{+ip_\ell x'}\;
+\frac{1}{2\pi R_y}\!\int_0^{2\pi R_y}\!dy'\,e^{+iq_k y'},
+\]
+with $q_k=k/R_y$. The LHS evaluates to $i$, while the RHS collapses the double sum to $(\ell,k)$ and picks up the usual extra factor $2$ from the $\beta\beta^\dagger-\beta^\dagger\beta$ pair, yielding
+\[
+i\;=\;i\,(2\pi R_x)(2\pi R_y)\,(2\,\omega_{\ell k})\,[\beta_{\ell k},\beta_{\ell k}^{\dagger}].
+\]
+therefore
+\begin{equation}
+[\beta_{mn},\beta_{m'n'}^{\dagger}]
+=\frac{1}{(2\pi R_x)(2\pi R_y)\,(2\,\omega_{mn})}\;\delta_{m m'}\delta_{n n'}
+=\frac{1}{4\pi^2 R_x R_y\,\omega_{mn}}\;\delta_{m m'}\delta_{n n'},
+\label{eq:torus-raw-algebra}
+\end{equation}
+and $[\beta,\beta]=[\beta^\dagger,\beta^\dagger]=0$.
+
+Define
+\[
+b_{mn}\equiv \frac{\beta_{mn}}{\sqrt{(2\pi R_x)(2\pi R_y)\,\omega_{mn}}},\qquad
+[b_{mn},b_{m'n'}^\dagger]=\delta_{mm'}\delta_{nn'}.
+\]
+Then
+\begin{equation}
+\phi(t,x,y)=\frac{1}{\sqrt{(2\pi R_x)(2\pi R_y)}}
+\sum_{m,n\in\mathbb{Z}}\frac{1}{\sqrt{2\omega_{mn}}}
+\Big(b_{mn}\,e^{-i(\omega_{mn}t-p_x x-p_y y)}+b_{mn}^\dagger\,e^{+i(\omega_{mn}t-p_x x+p_y y)}\Big),
+\end{equation}
+
+\subsection*{Propagators (From mode expansions)}
+\subsubsection*{Plane}
+Using the mode expansion for the plane, we have: 
+\begin{align*}
+    \bra{0} \phi(t,x,y)\phi(t',x',y') \ket{0} &= \frac{4}{L^2} \bra{0} \Big[
+        \sum_{m,n} \frac{\sin(p_x x)\sin(p_y y)}{\sqrt{2\omega_p}} \big(
+            a_p e^{-i\omega_p t} + a_p^{\dagger} e^{i\omega_p t} 
+        \big)
+    \Big] \\[1em]
+    &\quad \Big[
+        \sum_{m',n'} \frac{\sin(p_{x'} x')\sin(p_{y'} y')}{\sqrt{2\omega_{p'}}} \big(
+            a_{p'} e^{-i\omega_{p'} t'} + a_{p'}^{\dagger} e^{i\omega_{p'} t'} 
+        \big)
+    \Big]   
+    \ket{0}
+\end{align*}
+where we assume $t > t'$. Expanding the products, we see that only the term
+with $a_p a_{p'}^{\dagger}$ will contribute, since $a_p \ket{0} = 0$ and
+$\bra{0} a_{p'}^{\dagger} = 0$. Thus:
+\begin{align*}
+    \bra{0} \phi(t,x,y)\phi(t',x',y') \ket{0} &= \frac{4}{L^2} \sum_{m,n}
+    \sum_{m',n'} \frac{\sin(p_x x)\sin(p_y y)\sin(p_{x'} x')\sin(p_{y'} y')}{\sqrt{2\omega_p}
+    \sqrt{2\omega_{p'}}} \\[1em]
+    &\quad \bra{0} a_p a_{p'}^{\dagger} \ket{0} e^{-i\omega_p t} e^{i\omega_{p'} t'} \\
+    &= \frac{4}{L^2} \sum_{m,n} \sum_{m',n'} \frac{\sin(p_x x)\sin(p_y y)\sin(p_{x'} x')\sin(p_{y'} y')}{\sqrt{2\omega_p}
+    \sqrt{2\omega_{p'}}} \\[1em]
+    &\quad \delta_{mm'}\delta_{nn'} e^{-i\omega_p (t - t')} \\
+    &= \frac{4}{L^2} \sum_{m,n} \frac{\sin(p_x x)\sin(p_y y)\sin(p_{x} x')\sin(p_{y} y')}{2\omega_p}
+    e^{-i\omega_p (t - t')}
+\end{align*}
+\subsubsection*{Cylinder}
+Using the mode expansion for the cylinder, we have:
+\begin{align*}
+    \bra{0} \phi(t,x,y)\phi(t',x',y') \ket{0} &= \frac{1}{\pi R L} \bra{0} \Big[
+        \sum_{m,n} \frac{\sin\big(\frac{n\pi y}{L}\big)}{\sqrt{2\omega_{mn}}}
+        \big( b_{mn} e^{-i(\omega_{mn} t - p_x x)} + b_{mn}^{\dagger} e^{i(\omega_{mn} t - p_x x)} 
+        \big)
+    \Big] \\[1em]
+    &\quad \Big[
+        \sum_{m',n'} \frac{\sin\big(\frac{n'\pi y'}{L}\big)}{\sqrt{2\omega_{m'n'}}}
+        \big( b_{m'n'} e^{-i(\omega_{m'n'} t' - p_{x'} x')} + b_{m'n'}^{\dagger} e^{i(\omega_{m'n'} t' - p_{x'} x')} 
+        \big)
+    \Big]   
+    \ket{0}
+\end{align*}
+where we assume $t > t'$. Expanding the products, we see that only the term
+with $b_{mn} b_{m'n'}^{\dagger}$ will contribute, since $b_{mn} \ket{0} = 0$ and
+$\bra{0} b_{m'n'}^{\dagger} = 0$. Thus:
+\begin{align*}
+    \bra{0} \phi(t,x,y)\phi(t',x',y') \ket{0} &= \frac{1}{\pi R L} \sum_{m,n}
+    \sum_{m',n'} \frac{\sin\big(\frac{n\pi y}{L}\big)\sin\big(\frac{n'\pi y'}{L}\big)}{\sqrt{2\omega_{mn}}
+    \sqrt{2\omega_{m'n'}}} \\[1em]
+    &\quad \bra{0} b_{mn} b_{m'n'}^{\dagger} \ket{0} e^{-i(\omega_{mn} t - p_x x)} e^{i(\omega_{m'n'} t' - p_{x'} x')} \\
+    &= \frac{1}{\pi R L} \sum_{m,n} \sum_{m',n'} \frac{\sin\big(\frac{n\pi y}{L}\big)\sin\big(\frac{n'\pi y'}{L}\big)}{\sqrt{2\omega_{mn}}
+    \sqrt{2\omega_{m'n'}}} \\[1em]
+    &\quad \delta_{mm'}\delta_{nn'} e^{-i(\omega_{mn} (t - t') - p_x (x - x'))} \\
+    &= \frac{1}{\pi R L} \sum_{m,n} \frac{\sin\big(\frac{n\pi y}{L}\big)\sin\big(\frac{n\pi y'}{L}\big)}{2\omega_{mn}}
+    e^{-i(\omega_{mn} (t - t') - p_x (x - x'))}
+\end{align*}
+
+\subsubsection*{Torus}
+Using the mode expansion for the torus, we have:
+\begin{align*}
+    \bra{0} \phi(t,x,y)\phi(t',x',y') \ket{0} &= \frac{1}{(2\pi)^2 R_x R_y} \bra{0} \Big[
+        \sum_{m,n} \frac{1}{\sqrt{2\omega_{mn}}}
+        \big( b_{mn} e^{-i(\omega_{mn} t - p_x x - p_y y)} + b_{mn}^{\dagger} e^{i(\omega_{mn} t - p_x x + p_y y)} 
+        \big)
+    \Big] \\[1em]
+    &\quad \Big[
+        \sum_{m',n'} \frac{1}{\sqrt{2\omega_{m'n'}}}
+        \big( b_{m'n'} e^{-i(\omega_{m'n'} t' - p_{x'} x' - p_{y'} y')} + b_{m'n'}^{\dagger} e^{i(\omega_{m'n'} t' - p_{x'} x' + p_{y'} y')} 
+        \big)
+    \Big]   
+    \ket{0}
+\end{align*}
+where we assume $t > t'$. Expanding the products, we see that only the term
+with $b_{mn} b_{m'n'}^{\dagger}$ will contribute, since $b_{mn} \ket{0} = 0$ and
+$\bra{0} b_{m'n'}^{\dagger} = 0$. Thus:
+\begin{align*}
+    \bra{0} \phi(t,x,y)\phi(t',x',y') \ket{0} &= \frac{1}{(2\pi)^2 R_x R_y} \sum_{m,n}
+    \sum_{m',n'} \frac{1}{\sqrt{2\omega_{mn}}
+    \sqrt{2\omega_{m'n'}}} \\[1em]
+    &\quad \bra{0} b_{mn} b_{m'n'}^{\dagger} \ket{0} e^{-i(\omega_{mn} t - p_x x - p_y y)} e^{i(\omega_{m'n'} t' - p_{x'} x' + p_{y'} y')} \\
+    &= \frac{1}{(2\pi)^2 R_x R_y} \sum_{m,n} \sum_{m',n'} \frac{1}{\sqrt{2\omega_{mn}}
+    \sqrt{2\omega_{m'n'}}} \\[1em]
+    &\quad \delta_{mm'}\delta_{nn'} e^{-i(\omega_{mn} (t - t') - p_x (x - x') - p_y (y - y'))} \\
+    &= \frac{1}{(2\pi)^2 R_x R_y} \sum_{m,n} \frac{1}{2\omega_{mn}}
+    e^{-i(\omega_{mn} (t - t') - p_x (x - x') - p_y (y - y'))}
+\end{align*}
 
 \section*{Propagator from Path Integral}
 Consider the action of our system with a source term $J$:
@@ -1041,12 +1342,9 @@ w_{mn}(x,y)\,w_{mn}(x',y')\;\frac{e^{-i\omega_{mn}|t-t'|}}{2\,\omega_{mn}}.
 Recalling \(w_{mn}(x,y)=u_n(x)v_m(y)\) with \(u_n,v_m\) orthonormal sines, this is
 \begin{align}
 \boxed{\;
-\langle 0|T\{\phi(t,x,y)\phi(t',x',y')\}|0\rangle
+\langle 0|\phi(t,x,y)\phi(t',x',y')|0\rangle
 =\sum_{n=1}^\infty\sum_{m=1}^\infty
 \frac{u_n(x)u_n(x')\,v_m(y)v_m(y')}{2\,\omega_{mn}}\;
 e^{-i\omega_{mn}|t-t'|}\; } \, .
 \end{align}
-
-
-
 \end{document}
