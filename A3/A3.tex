@@ -284,7 +284,7 @@ transformations. Lastly, we would also have to make the derivatives covariant
 instead of partial, but since $\phi$ is a scalar field, the covariant derivative
 reduces to the partial derivative.
 
-\section*{Question 3}
+\section*{Question 3: Complex scalar field and scalar electro-dynamics}
 We can imagine $\phi$ and $\phi^{\dagger}$ as a sum of two real fields $\phi_1$ 
 and $\phi_2$, such that $\phi = \phi_1 + i\phi_2$ and $\phi^{\dagger} = \phi_1 -
 i\phi_2$. Plugging this presecription into our Lagrangian
@@ -1196,7 +1196,7 @@ The two-point function follows from functional derivatives:
 \label{eq:2pt-from-Z}
 \end{align}
 Let 
-\begin{align}
+\begin{align*}
 u_n(x)=\sqrt{\frac{2}{L}}\sin\!\frac{n\pi x}{L}
 \end{align*}
 And with this definition, let
@@ -1299,7 +1299,7 @@ S[\phi;J]
 \bigg[\frac{1}{2}\dot{\phi}_{mn}^2-\frac{1}{2}\omega_{mn}^2\,\phi_{mn}^2
 +J_{mn}(t)\,\phi_{mn}(t)\bigg]. \label{eq:S-mode}
 \end{align}
-Hence the generating functional factorizes:
+So the path integral  measure factorizes:
 \begin{align}
 Z[J]
 &=\prod_{m,n}\,\int\mathcal D\phi_{mn}\;
@@ -1312,7 +1312,9 @@ Z[J]
 J_{mn}(t)\,G_F^{(mn)}(t-t')\,J_{mn}(t')\Big\}.
 \label{eq:ZJ-GF}
 \end{align}
-In the second line we completed the square and performed the Gaussian integral for each mode. The function \(G_F^{(mn)}\) is the \(0{+}1\)D Feynman Green’s function for frequency \(\omega_{mn}\), defined by the distributional identity
+In the second line we completed the square and performed the Gaussian integral
+for each mode. The function \(G_F^{(mn)}\) is the \(0{+}1\)D Feynman Green’s
+function for frequency \(\omega_{mn}\), defined by
 \begin{align}
 \big(\partial_t^2+\omega_{mn}^2\big)\,G_F^{(mn)}(t-t')
 = i\,\delta(t-t').
@@ -1324,7 +1326,6 @@ G_F^{(mn)}(t-t')=\int\!\frac{dp^0}{2\pi}\;\frac{i\,e^{-ip^0(t-t')}}{(p^0)^2-\ome
 \label{eq:GF-1D}
 \end{align}
 
-\subsection*{Functional differentiation and recombination}
 Using \eqref{eq:2pt-from-Z} and \eqref{eq:ZJ-GF}, and the mode expansion of \(J\),
 \begin{align}
 \frac{\delta}{\delta J(t,x,y)}
@@ -1336,15 +1337,186 @@ we obtain
 &=\sum_{m,n}\sum_{m',n'} w_{mn}(x,y)\,w_{m'n'}(x',y')\;
 G_F^{(mn)}(t-t')\;\delta_{mm'}\delta_{nn'} \nonumber\\
 &=\sum_{m=1}^{\infty}\sum_{n=1}^{\infty}
-w_{mn}(x,y)\,w_{mn}(x',y')\;\frac{e^{-i\omega_{mn}|t-t'|}}{2\,\omega_{mn}}.
+w_{mn}(x,y)\,w_{mn}(x',y')\;\frac{e^{-i\omega_{mn}(t-t')}}{2\,\omega_{mn}}.
 \label{eq:final-orthonormal}
 \end{align}
 Recalling \(w_{mn}(x,y)=u_n(x)v_m(y)\) with \(u_n,v_m\) orthonormal sines, this is
 \begin{align}
-\boxed{\;
 \langle 0|\phi(t,x,y)\phi(t',x',y')|0\rangle
-=\sum_{n=1}^\infty\sum_{m=1}^\infty
+= \frac{4}{L^2} \sum_{n=1}^\infty\sum_{m=1}^\infty
 \frac{u_n(x)u_n(x')\,v_m(y)v_m(y')}{2\,\omega_{mn}}\;
-e^{-i\omega_{mn}|t-t'|}\; } \, .
+e^{-i\omega_{mn}(t-t')}.
 \end{align}
+
+\subsubsection*{Cylinder}
+For the cylinder, all we have to do is change the basis functions to
+\begin{align*}
+u_m(x)=\frac{e^{i p_x x}}{\sqrt{2\pi R}},\quad p_x=\frac{m}{R},\quad m\in\mathbb{Z},\qquad
+v_n(y)=\sqrt{\frac{2}{L}}\sin\!\frac{n\pi y}{L},\quad n=1,2,3,\ldots
+\end{align*}
+so that when substituted into \eqref{eq:final-orthonormal}, recalling  that 
+$w_{mn}(x, y) = u_m(x) u_n(y)$, we get
+\begin{align}
+\langle 0|\phi(t,x,y)\phi(t',x',y')|0\rangle
+= \frac{1}{\pi R L} \sum_{m\in\mathbb{Z}}\sum_{n=1}^\infty
+\frac{e^{i p_x (x - x')}\,v_n(y)v_n(y')}{2\,\omega_{mn}}\;
+e^{-i\omega_{mn}(t-t')}.
+\end{align}
+
+\subsubsection*{Torus}
+For the torus, we change the basis functions to 
+\begin{align*}
+u_m(x)=\frac{e^{i p_x x}}{\sqrt{2\pi R_x}},\quad p_x=\frac{m}{R_x},\quad m\in\mathbb{Z},\qquad
+v_n(y)=\frac{e^{i p_y y}}{\sqrt{2\pi R_y}},\quad p_y=\frac{n}{R_y},\quad n\in\mathbb{Z},
+\end{align*}
+so that when substituted into \eqref{eq:final-orthonormal}, we get
+\begin{align}
+\langle 0|\phi(t,x,y)\phi(t',x',y')|
+0\rangle
+= \frac{1}{(2\pi)^2 R_x R_y} \sum_{m,n\in\mathbb{Z}}
+\frac{e^{i p_x (x - x')}\,e^{i p_y (y - y')}}{2\,\omega_{mn}}\;
+e^{-i\omega_{mn}(t-t')}.
+\end{align}
+
+
+\section*{Question 5: Interaction picture and the Heisenberg picture}
+Fix a Cauchy slice $\Sigma_{t_0}$ (say $t_0=0$). The fields are
+$\phi(\mathbf{x},0)$ and $\pi(\mathbf{x},0)$, and the full Hamiltonian
+\[
+H \;=\; H_0 + H_{\text{int}}
+\]
+is the spatial integral of the Hamiltonian density on $\Sigma_{t}$, evaluated at $t=t_0$.
+Here $H_0$ is quadratic (free theory), while $H_{\text{int}}$ contains interactions such as $\lambda \phi^4$.
+
+\subsection*{Schr\"odinger picture (S).}
+Operators are time independent, states carry all time dependence:
+\[
+i\frac{d}{dt}\,|\Psi_S(t)\rangle = H\,|\Psi_S(t)\rangle,
+\qquad
+\phi_S(\mathbf{x},t)=\phi_S(\mathbf{x}).
+\]
+The Schr\"odinger evolution operator is
+\[
+U_S(t,t_0)=e^{-iH(t-t_0)},\qquad |\Psi_S(t)\rangle = U_S(t,t_0)|\Psi_S(t_0)\rangle.
+\]
+
+\subsection*{Heisenberg picture (H).}
+States are fixed, operators evolve with the full Hamiltonian:
+\[
+|\Psi_H\rangle = |\Psi_S(t_0)\rangle,\qquad
+\phi_H(\mathbf{x},t) = e^{+iHt}\,\phi_S(\mathbf{x})\,e^{-iHt}.
+\]
+Hence
+\[
+i\frac{d}{dt}\phi_H(\mathbf{x},t) = [\phi_H(\mathbf{x},t),H],
+\]
+so $\phi_H$ satisfies the full interacting equation of motion.
+
+\subsection*{Interaction picture (I).}
+Split $H=H_0+H_{\text{int}}$. Define
+\[
+\phi_I(\mathbf{x},t) \equiv e^{+iH_0 t}\,\phi_S(\mathbf{x})\,e^{-iH_0 t},
+\qquad
+|\Psi_I(t)\rangle \equiv e^{+iH_0 t}\,|\Psi_S(t)\rangle.
+\]
+Then the fields evolve freely:
+\[
+i\frac{d}{dt}\phi_I(\mathbf{x},t) = [\phi_I(\mathbf{x},t),H_0],
+\]
+while the states evolve with the interaction-picture Hamiltonian
+\[
+H_I(t) \equiv e^{+iH_0 t}\,H_{\text{int}}\,e^{-iH_0 t}.
+\]
+Indeed,
+\begin{align}
+i\frac{d}{dt}|\Psi_I(t)\rangle
+&= i\frac{d}{dt}\!\big(e^{+iH_0 t}|\Psi_S(t)\rangle\big)
+= H_0 e^{+iH_0 t}|\Psi_S(t)\rangle + e^{+iH_0 t}\big(-iH|\Psi_S(t)\rangle\big)\nonumber\\
+&= -\,e^{+iH_0 t}H_{\text{int}}e^{-iH_0 t}\,|\Psi_I(t)\rangle
+= H_I(t)\,|\Psi_I(t)\rangle.
+\label{eq:IP-Schro}
+\end{align}
+
+In the interaction picture, the time-evolution operator $U_I(t,t_0)$ is defined as the solution of
+\[
+i\,\frac{d}{dt}U_I(t,t_0) = H_I(t)\,U_I(t,t_0),
+\qquad U_I(t_0,t_0)=\mathbf{1},
+\]
+where $H_I(t)$ is the interaction Hamiltonian in the interaction picture.
+
+To check that the time-ordered exponential
+\[
+U_I(t,t_0) = \mathcal{T}\exp\!\left[-i\!\int_{t_0}^{t}\!H_I(t')\,dt'\right]
+\]
+actually satisfies this, we can expand the exponential definition of the time-ordered operator as
+\[
+U_I(t,t_0)
+= \mathbf{1} - i\!\int_{t_0}^{t}\!dt_1\,H_I(t_1)
++ (-i)^2\!\int_{t_0}^{t}\!dt_1\!\!\int_{t_0}^{t_1}\!dt_2\,H_I(t_1)H_I(t_2) + \cdots.
+\]
+
+Now differentiate both sides with respect to $t$:
+\begin{align*}
+\frac{d}{dt}U_I(t,t_0)
+&= -i\,H_I(t)
++ (-i)^2\!\int_{t_0}^{t}\!dt_2\,H_I(t)H_I(t_2)
++ (-i)^3\!\int_{t_0}^{t}\!dt_2\!\!\int_{t_0}^{t_2}\!dt_3\,H_I(t)H_I(t_2)H_I(t_3)+\cdots. \\
+&= -i\,H_I(t)\,\Big[\mathbf{1}
+- i\!\int_{t_0}^{t}\!dt_2\,H_I(t_2)
++ (-i)^2\!\int_{t_0}^{t}\!dt_2\!\!\int_{t_0}^{t_2}\!dt_3\,H_I(t_2)H_I(t_3)+\cdots\Big] \\
+&= -i\,H_I(t)\,U_I(t,t_0).
+\end{align*}
+Therefore
+\[
+i\,\frac{d}{dt}U_I(t,t_0) = H_I(t)\,U_I(t,t_0),
+\]
+as required. We also have $U_I(t_0,t_0)=\mathbf{1}$ since all integrals vanish when $t=t_0$.
+
+If all $H_I(t)$ at different times commuted with each other, then we could simply write
+\[
+U_I(t,t_0) = \exp\!\left[-i\!\int_{t_0}^{t}\!H_I(t')\,dt'\right],
+\]
+and the ordinary exponential would work fine.
+
+However, in quantum field theory the operators $H_I(t_1)$ and $H_I(t_2)$ do not generally commute:
+\[
+[H_I(t_1),\,H_I(t_2)] \neq 0.
+\]
+That means the order in which we multiply them matters. An ordinary exponential assumes all terms commute,
+so it would mix up the order and give the wrong result.
+
+To fix this, we need to order the operators in terms of increasing time.
+\[
+\mathcal{T}\big[H_I(t_1)H_I(t_2)\big] =
+\begin{cases}
+H_I(t_1)H_I(t_2), & \text{if } t_1 > t_2,\\[0.3em]
+H_I(t_2)H_I(t_1), & \text{if } t_2 > t_1.
+\end{cases}
+\]
+In the interaction picture, we explicitly separate the free evolution $e^{-iH_0(t-t_0)}$ from the
+interaction effects, so that fields evolve as in the free theory while the interaction acts on the states.
+This separation introduces the time-dependent $H_I(t)$, which cannot be pulled out of the integral as a constant.
+
+Therefore, one cannot replace $H_I(t)$ by the full $H$ in the exponential:
+the equality
+\[
+U_I(t,t_0) = e^{-iH(t-t_0)}
+\]
+does not hold because $H_I(t)$ is not constant in time and does not commute with itself at different times.
+Instead, the exact relation between the full and interaction-picture evolution operators is
+\[
+e^{-iH(t-t_0)} \;=\; e^{-iH_0(t-t_0)}\,U_I(t,t_0),
+\]
+which shows how the full dynamics factorizes into free evolution and an additional
+time-ordered contribution from the interaction Hamiltonian.
+
+\section*{Question 6: An interesting path-integral transformation}
+So the local operator $\mathcal{O}(\phi(x))$ allows us to write the interaction piece
+\[
+S_1[\phi] = \frac{1}{2} \sum_{A, B} \int d^dx \, d^dy \, \mathcal{O}_A(\phi(x)) \, \Delta_{AB}(x,y) \, \mathcal{O}_B(\phi(y)).
+\]
+and we are allowed to assume that 
+\[
+\exp\big\{- S_1[\phi]\big\} \propto \int \mathcal{D}\alpha \exp\bigg\{-S_2[\phi, \alpha]\bigg\},
+\]
 \end{document}
