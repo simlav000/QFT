@@ -875,4 +875,178 @@ then their algebra is
 
 Now, for the cylinder, the same boundary exist for for $\phi(y = 0) = \phi(y =
 L) = 0$ but now we impose instead $\phi(x = 0) = \phi(x = L)$
+
+\section*{Propagator from Path Integral}
+Consider the action of our system with a source term $J$:
+\begin{align}
+S[\phi;J]
+&=\int dt\int_{0}^{L}\!dx\int_{0}^{L}\!dy\,
+\bigg[\frac{1}{2}(\partial_t\phi)^2-\frac{1}{2}(\nabla\phi)^2-\frac{1}{2}m^2\phi^2
++J\,\phi\bigg]
+\\
+Z[J]
+&=\int\mathcal D\phi\; \exp\!\big\{\,i\,S[\phi;J]\big\}. \label{eq:ZJ}
+\end{align}
+The two-point function follows from functional derivatives:
+\begin{align}
+\langle 0|\phi(t,x,y)\phi(t',x',y')|0\rangle
+=\frac{1}{Z[0]}\,
+\frac{\delta^2 Z[J]}{i^2\,\delta J(t,x,y)\,\delta J(t',x',y')}\bigg|_{J=0}.
+\label{eq:2pt-from-Z}
+\end{align}
+Let 
+\begin{align}
+u_n(x)=\sqrt{\frac{2}{L}}\sin\!\frac{n\pi x}{L}
+\end{align*}
+And with this definition, let
+\begin{align*}
+    w_{mn}(x, y) = u_m(x) u_n(y)
+\end{align*}
+Expand the field and source in this basis:
+\begin{align}
+\phi(t,x,y)&=\sum_{m,n=1}^{\infty}\phi_{mn}(t)\,w_{mn}(x,y),\\
+J(t,x,y)&=\sum_{m,n=1}^{\infty}J_{mn}(t)\,w_{mn}(x,y),
+\end{align}
+with 
+\begin{align}
+\phi_{mn}(t)=\int_0^L\!dx\int_0^L\!dy\,w_{mn}(x,y)\,\phi(t,x,y),\qquad
+J_{mn}(t)=\int_0^L\!dx\int_0^L\!dy\,w_{mn}(x,y)\,J(t,x,y).
+\end{align}
+Compute
+\begin{align}
+(\partial_t \phi)^2
+ &= \bigg(\sum_{m,n} \dot{\phi}_{mn}(t)\, w_{mn}(x,y)\bigg)
+    \bigg(\sum_{m',n'} \dot{\phi}_{m'n'}(t)\, w_{m'n'}(x,y)\bigg) \\
+ &= \sum_{m,n}\sum_{m',n'} \dot{\phi}_{mn}\dot{\phi}_{m'n'} \, w_{mn} w_{m'n'}.
+\end{align}
+Integrate over space and use orthonormality:
+\begin{align}
+\int_0^L\!dx \int_0^L\!dy \, (\partial_t \phi)^2
+ = \sum_{m,n}\sum_{m',n'}
+   \dot{\phi}_{mn}\dot{\phi}_{m'n'} \,
+   \delta_{mm'}\delta_{nn'}
+ = \sum_{m,n} \dot{\phi}_{mn}^2.
+\end{align}
+Hence
+\begin{align}
+\int dt \int d^2x \, \frac{1}{2}(\partial_t\phi)^2
+= \sum_{m,n} \int dt \, \frac{1}{2}\dot{\phi}_{mn}^2.
+\end{align}
+Similarly,
+\begin{align}
+(\nabla\phi)^2
+ &= \sum_{m,n}\sum_{m',n'}
+    \phi_{mn}(t)\phi_{m'n'}(t) \,
+    \nabla w_{mn}\!\cdot\!\nabla w_{m'n'}.
+\end{align}
+Use Green’s identity (Dirichlet BCs kill the boundary term):
+\begin{align}
+\int_0^L\!dx \int_0^L\!dy \, \nabla w_{mn}\!\cdot\!\nabla w_{m'n'}
+ &= \int d^2x \, w_{mn}(-\nabla^2)w_{m'n'} \\
+ &= \lambda_{m'n'} \int d^2x \, w_{mn} w_{m'n'}
+ = \lambda_{mn} \, \delta_{mm'}\delta_{nn'}.
+\end{align}
+where $\lambda_{mn} = \Big(\frac{n\pi}{L}\Big)^2 + \Big(\frac{m\pi}{L}\Big)^2$
+Therefore
+\begin{align}
+\int d^2x \, (\nabla\phi)^2
+ = \sum_{m,n}\sum_{m',n'} \phi_{mn}\phi_{m'n'} \,
+   \lambda_{m'n'} \delta_{mm'}\delta_{nn'}
+ = \sum_{m,n} \lambda_{mn}\, \phi_{mn}^2,
+\end{align}
+and so
+\begin{align}
+-\int dt \int d^2x \, \frac{1}{2}(\nabla\phi)^2
+= -\sum_{m,n} \int dt \, \frac{1}{2}\lambda_{mn}\, \phi_{mn}^2.
+\end{align}
+Now, for the mass term
+\begin{align}
+\phi^2
+ &= \sum_{m,n}\sum_{m',n'} \phi_{mn}\phi_{m'n'} \, w_{mn} w_{m'n'}, \\
+\int d^2x \, \phi^2
+ &= \sum_{m,n}\sum_{m',n'} \phi_{mn}\phi_{m'n'} \, \delta_{mm'}\delta_{nn'}
+  = \sum_{m,n} \phi_{mn}^2,
+\end{align}
+hence
+\begin{align}
+-\int dt \int d^2x \, \frac{1}{2} m^2 \phi^2
+= -\sum_{m,n} \int dt \, \frac{1}{2} m^2 \phi_{mn}^2.
+\end{align}
+And finally the source term.
+\begin{align}
+\int d^2x \, J\phi
+ &= \int d^2x \,
+    \bigg(\sum_{m,n} J_{mn} w_{mn}\bigg)
+    \bigg(\sum_{m',n'} \phi_{m'n'} w_{m'n'}\bigg) \\
+ &= \sum_{m,n}\sum_{m',n'} J_{mn}\phi_{m'n'} \,
+    \delta_{mm'}\delta_{nn'}
+  = \sum_{m,n} J_{mn}\phi_{mn}.
+\end{align}
+
+Collecting everything:
+\begin{align}
+S[\phi;J]
+ &= \sum_{m,n} \int dt \,
+    \bigg[ \frac{1}{2}\dot{\phi}_{mn}^2
+           -\frac{1}{2}(\lambda_{mn}+m^2)\phi_{mn}^2
+           + J_{mn}(t)\phi_{mn}(t) \bigg].
+\end{align}
+Define $\omega_{mn}^2 \equiv \lambda_{mn}+m^2$ to obtain the diagonal, decoupled form
+\begin{align}
+S[\phi;J]
+&=\sum_{m,n}\int dt\,
+\bigg[\frac{1}{2}\dot{\phi}_{mn}^2-\frac{1}{2}\omega_{mn}^2\,\phi_{mn}^2
++J_{mn}(t)\,\phi_{mn}(t)\bigg]. \label{eq:S-mode}
+\end{align}
+Hence the generating functional factorizes:
+\begin{align}
+Z[J]
+&=\prod_{m,n}\,\int\mathcal D\phi_{mn}\;
+\exp\Big\{\,i\int dt\,
+\big[\tfrac{1}{2}\dot{\phi}_{mn}^2-\tfrac{1}{2}\omega_{mn}^2\phi_{mn}^2
++J_{mn}\phi_{mn}\big]\Big\}
+\nonumber\\
+&=Z[0]\,
+\exp\Big\{\frac{i}{2}\sum_{m,n}\int dt\,dt'\,
+J_{mn}(t)\,G_F^{(mn)}(t-t')\,J_{mn}(t')\Big\}.
+\label{eq:ZJ-GF}
+\end{align}
+In the second line we completed the square and performed the Gaussian integral for each mode. The function \(G_F^{(mn)}\) is the \(0{+}1\)D Feynman Green’s function for frequency \(\omega_{mn}\), defined by the distributional identity
+\begin{align}
+\big(\partial_t^2+\omega_{mn}^2\big)\,G_F^{(mn)}(t-t')
+= i\,\delta(t-t').
+\end{align}
+Equivalently,
+\begin{align}
+G_F^{(mn)}(t-t')=\int\!\frac{dp^0}{2\pi}\;\frac{i\,e^{-ip^0(t-t')}}{(p^0)^2-\omega_{mn}^2+i\epsilon}
+=\frac{e^{-i\omega_{mn}|t-t'|}}{2\,\omega_{mn}}.
+\label{eq:GF-1D}
+\end{align}
+
+\subsection*{Functional differentiation and recombination}
+Using \eqref{eq:2pt-from-Z} and \eqref{eq:ZJ-GF}, and the mode expansion of \(J\),
+\begin{align}
+\frac{\delta}{\delta J(t,x,y)}
+=\sum_{m,n}w_{mn}(x,y)\,\frac{\delta}{\delta J_{mn}(t)},
+\end{align}
+we obtain
+\begin{align}
+\langle 0|T\{\phi(t,x,y)\phi(t',x',y')\}|0\rangle
+&=\sum_{m,n}\sum_{m',n'} w_{mn}(x,y)\,w_{m'n'}(x',y')\;
+G_F^{(mn)}(t-t')\;\delta_{mm'}\delta_{nn'} \nonumber\\
+&=\sum_{m=1}^{\infty}\sum_{n=1}^{\infty}
+w_{mn}(x,y)\,w_{mn}(x',y')\;\frac{e^{-i\omega_{mn}|t-t'|}}{2\,\omega_{mn}}.
+\label{eq:final-orthonormal}
+\end{align}
+Recalling \(w_{mn}(x,y)=u_n(x)v_m(y)\) with \(u_n,v_m\) orthonormal sines, this is
+\begin{align}
+\boxed{\;
+\langle 0|T\{\phi(t,x,y)\phi(t',x',y')\}|0\rangle
+=\sum_{n=1}^\infty\sum_{m=1}^\infty
+\frac{u_n(x)u_n(x')\,v_m(y)v_m(y')}{2\,\omega_{mn}}\;
+e^{-i\omega_{mn}|t-t'|}\; } \, .
+\end{align}
+
+
+
 \end{document}
