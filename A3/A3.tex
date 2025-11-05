@@ -1178,175 +1178,70 @@ $\bra{0} b_{m'n'}^{\dagger} = 0$. Thus:
 \end{align*}
 
 \section*{Propagator from Path Integral}
-Consider the action of our system with a source term $J$:
-\begin{align}
-S[\phi;J]
-&=\int dt\int_{0}^{L}\!dx\int_{0}^{L}\!dy\,
-\bigg[\frac{1}{2}(\partial_t\phi)^2-\frac{1}{2}(\nabla\phi)^2-\frac{1}{2}m^2\phi^2
-+J\,\phi\bigg]
-\\
-Z[J]
-&=\int\mathcal D\phi\; \exp\!\big\{\,i\,S[\phi;J]\big\}. \label{eq:ZJ}
-\end{align}
-The two-point function follows from functional derivatives:
-\begin{align}
-\langle 0|\phi(t,x,y)\phi(t',x',y')|0\rangle
-=\frac{1}{Z[0]}\,
-\frac{\delta^2 Z[J]}{i^2\,\delta J(t,x,y)\,\delta J(t',x',y')}\bigg|_{J=0}.
-\label{eq:2pt-from-Z}
-\end{align}
-Let 
+Let's express the field values by a discrete Fourier series
 \begin{align*}
-u_n(x)=\sqrt{\frac{2}{L}}\sin\!\frac{n\pi x}{L}
+\phi(t,x,y) &= \frac{1}{V} \sum_k e^{-i\omega_k t} w_{mn}(x,y) \phi_{mn}^a,\\
 \end{align*}
-And with this definition, let
+Where \(V\) is the spatial volume, and \(w_k(x,y)\) are orthonormal basis functions. Since $\phi(x)$ is real, we have 
+the condition $(\phi^a_{mn})^{\+}= \phi^{-a}_{mn}$. The integral measure becomes
 \begin{align*}
-    w_{mn}(x, y) = u_m(x) u_n(y)
+    \mathcal{D}\phi &= \prod_k d\text{Re}\,\phi^a_{mn}\,d\text{Im}\,\phi^a_{mn} \\
 \end{align*}
-Expand the field and source in this basis:
-\begin{align}
-\phi(t,x,y)&=\sum_{m,n=1}^{\infty}\phi_{mn}(t)\,w_{mn}(x,y),\\
-J(t,x,y)&=\sum_{m,n=1}^{\infty}J_{mn}(t)\,w_{mn}(x,y),
-\end{align}
-with 
-\begin{align}
-\phi_{mn}(t)=\int_0^L\!dx\int_0^L\!dy\,w_{mn}(x,y)\,\phi(t,x,y),\qquad
-J_{mn}(t)=\int_0^L\!dx\int_0^L\!dy\,w_{mn}(x,y)\,J(t,x,y).
-\end{align}
-Compute
-\begin{align}
-(\partial_t \phi)^2
- &= \bigg(\sum_{m,n} \dot{\phi}_{mn}(t)\, w_{mn}(x,y)\bigg)
-    \bigg(\sum_{m',n'} \dot{\phi}_{m'n'}(t)\, w_{m'n'}(x,y)\bigg) \\
- &= \sum_{m,n}\sum_{m',n'} \dot{\phi}_{mn}\dot{\phi}_{m'n'} \, w_{mn} w_{m'n'}.
-\end{align}
-Integrate over space and use orthonormality:
-\begin{align}
-\int_0^L\!dx \int_0^L\!dy \, (\partial_t \phi)^2
- = \sum_{m,n}\sum_{m',n'}
-   \dot{\phi}_{mn}\dot{\phi}_{m'n'} \,
-   \delta_{mm'}\delta_{nn'}
- = \sum_{m,n} \dot{\phi}_{mn}^2.
-\end{align}
-Hence
-\begin{align}
-\int dt \int d^2x \, \frac{1}{2}(\partial_t\phi)^2
-= \sum_{m,n} \int dt \, \frac{1}{2}\dot{\phi}_{mn}^2.
-\end{align}
-Similarly,
-\begin{align}
-(\nabla\phi)^2
- &= \sum_{m,n}\sum_{m',n'}
-    \phi_{mn}(t)\phi_{m'n'}(t) \,
-    \nabla w_{mn}\!\cdot\!\nabla w_{m'n'}.
-\end{align}
-Use Green’s identity (Dirichlet BCs kill the boundary term):
-\begin{align}
-\int_0^L\!dx \int_0^L\!dy \, \nabla w_{mn}\!\cdot\!\nabla w_{m'n'}
- &= \int d^2x \, w_{mn}(-\nabla^2)w_{m'n'} \\
- &= \lambda_{m'n'} \int d^2x \, w_{mn} w_{m'n'}
- = \lambda_{mn} \, \delta_{mm'}\delta_{nn'}.
-\end{align}
-where $\lambda_{mn} = \Big(\frac{n\pi}{L}\Big)^2 + \Big(\frac{m\pi}{L}\Big)^2$
+and later we will take the continuum limit \(V \to \infty\) to convert sums to integrals 
+(up to factors of \(2\pi\)).
+Looking at the action
+\begin{align*}
+    S[\phi] &= \frac{1}{2} \int dt \int d^2\mathbf{x} \Big[
+        (\partial_t \phi)^2 - (\nabla \phi)^2 - m^2 \phi^2
+    \Big] \\
+\end{align*}
+We can write the kinetic term as 
+\begin{align*}
+    \int dt \int d^2\mathbf x \; (\partial_t \phi)^2 &= \int dt \int d^2\mathbf x \Bigg(
+        \left(\frac{1}{\sqrt{V}} \sum_p \dot{\phi}_p(t) w_p(x,y) \right)
+        \left(\frac{1}{\sqrt{V}} \sum_q \dot{\phi}_q(t) w_q(x,y) \right)
+    \Bigg) \\
+    &= \int dt \; \frac{1}{V} \sum_{p,q} \dot{\phi}_p(t) \dot{\phi}_q(t) \int d^2\mathbf x \; w_p(x,y) w_q(x,y) \\
+    &= \int dt \; \sum_{p,q} \dot{\phi}_p(t) \dot{\phi}_q(t) \delta_{pq} \\
+    &= \int dt \; \sum_{p} |\dot{\phi}_p(t)|^2 \\
+\end{align*}
+Now Fourier-expand
+\[
+\phi_{\mathbf p}(t)=\frac{1}{V}\sum_{a}e^{-i\omega_a t}\,\phi_{\mathbf p}^{\,a}.
+\]
+
+\[
+\dot\phi_{\mathbf p}(t)=\frac{1}{V}\sum_{a}(-i\omega_a)e^{-i\omega_a t}\,\phi_{\mathbf p}^{\,a}.
+\]
+
+\[
+\int dt\,|\dot\phi_{\mathbf p}(t)|^2
+= \int dt\,\frac{1}{V^2}\sum_{a,b}(-i\omega_a)(+i\omega_b)
+  e^{-i(\omega_a-\omega_b)t}\,\phi_{\mathbf p}^{\,a}(\phi_{\mathbf p}^{\,b})^\ast.
+\]
+
+\[
+\int dt\,e^{-i(\omega_a-\omega_b)t}=V\,\delta_{ab}.
+\]
+
+\[
+\int dt\,|\dot\phi_{\mathbf p}(t)|^2
+= \frac{1}{V}\sum_{a}\omega_a^2\,|\phi_{\mathbf p}^{\,a}|^2.
+\]
 Therefore
-\begin{align}
-\int d^2x \, (\nabla\phi)^2
- = \sum_{m,n}\sum_{m',n'} \phi_{mn}\phi_{m'n'} \,
-   \lambda_{m'n'} \delta_{mm'}\delta_{nn'}
- = \sum_{m,n} \lambda_{mn}\, \phi_{mn}^2,
-\end{align}
-and so
-\begin{align}
--\int dt \int d^2x \, \frac{1}{2}(\nabla\phi)^2
-= -\sum_{m,n} \int dt \, \frac{1}{2}\lambda_{mn}\, \phi_{mn}^2.
-\end{align}
-Now, for the mass term
-\begin{align}
-\phi^2
- &= \sum_{m,n}\sum_{m',n'} \phi_{mn}\phi_{m'n'} \, w_{mn} w_{m'n'}, \\
-\int d^2x \, \phi^2
- &= \sum_{m,n}\sum_{m',n'} \phi_{mn}\phi_{m'n'} \, \delta_{mm'}\delta_{nn'}
-  = \sum_{m,n} \phi_{mn}^2,
-\end{align}
-hence
-\begin{align}
--\int dt \int d^2x \, \frac{1}{2} m^2 \phi^2
-= -\sum_{m,n} \int dt \, \frac{1}{2} m^2 \phi_{mn}^2.
-\end{align}
-And finally the source term.
-\begin{align}
-\int d^2x \, J\phi
- &= \int d^2x \,
-    \bigg(\sum_{m,n} J_{mn} w_{mn}\bigg)
-    \bigg(\sum_{m',n'} \phi_{m'n'} w_{m'n'}\bigg) \\
- &= \sum_{m,n}\sum_{m',n'} J_{mn}\phi_{m'n'} \,
-    \delta_{mm'}\delta_{nn'}
-  = \sum_{m,n} J_{mn}\phi_{mn}.
-\end{align}
+\[
+\int dt \int d^2\mathbf x \; (\partial_t \phi)^2 =\frac{1}{2V}\sum_{\mathbf p}\sum_{a}\omega_a^2\,|\phi_{\mathbf p}^{\,a}|^2.
+\]
 
-Collecting everything:
-\begin{align}
-S[\phi;J]
- &= \sum_{m,n} \int dt \,
-    \bigg[ \frac{1}{2}\dot{\phi}_{mn}^2
-           -\frac{1}{2}(\lambda_{mn}+m^2)\phi_{mn}^2
-           + J_{mn}(t)\phi_{mn}(t) \bigg].
-\end{align}
-Define $\omega_{mn}^2 \equiv \lambda_{mn}+m^2$ to obtain the diagonal, decoupled form
-\begin{align}
-S[\phi;J]
-&=\sum_{m,n}\int dt\,
-\bigg[\frac{1}{2}\dot{\phi}_{mn}^2-\frac{1}{2}\omega_{mn}^2\,\phi_{mn}^2
-+J_{mn}(t)\,\phi_{mn}(t)\bigg]. \label{eq:S-mode}
-\end{align}
-So the path integral  measure factorizes:
-\begin{align}
-Z[J]
-&=\prod_{m,n}\,\int\mathcal D\phi_{mn}\;
-\exp\Big\{\,i\int dt\,
-\big[\tfrac{1}{2}\dot{\phi}_{mn}^2-\tfrac{1}{2}\omega_{mn}^2\phi_{mn}^2
-+J_{mn}\phi_{mn}\big]\Big\}
-\nonumber\\
-&=Z[0]\,
-\exp\Big\{\frac{i}{2}\sum_{m,n}\int dt\,dt'\,
-J_{mn}(t)\,G_F^{(mn)}(t-t')\,J_{mn}(t')\Big\}.
-\label{eq:ZJ-GF}
-\end{align}
-In the second line we completed the square and performed the Gaussian integral
-for each mode. The function \(G_F^{(mn)}\) is the \(0{+}1\)D Feynman Green’s
-function for frequency \(\omega_{mn}\), defined by
-\begin{align}
-\big(\partial_t^2+\omega_{mn}^2\big)\,G_F^{(mn)}(t-t')
-= i\,\delta(t-t').
-\end{align}
-Equivalently,
-\begin{align}
-G_F^{(mn)}(t-t')=\int\!\frac{dp^0}{2\pi}\;\frac{i\,e^{-ip^0(t-t')}}{(p^0)^2-\omega_{mn}^2+i\epsilon}
-=\frac{e^{-i\omega_{mn}|t-t'|}}{2\,\omega_{mn}}.
-\label{eq:GF-1D}
-\end{align}
-
-Using \eqref{eq:2pt-from-Z} and \eqref{eq:ZJ-GF}, and the mode expansion of \(J\),
-\begin{align}
-\frac{\delta}{\delta J(t,x,y)}
-=\sum_{m,n}w_{mn}(x,y)\,\frac{\delta}{\delta J_{mn}(t)},
-\end{align}
-we obtain
-\begin{align}
-\langle 0|T\{\phi(t,x,y)\phi(t',x',y')\}|0\rangle
-&=\sum_{m,n}\sum_{m',n'} w_{mn}(x,y)\,w_{m'n'}(x',y')\;
-G_F^{(mn)}(t-t')\;\delta_{mm'}\delta_{nn'} \nonumber\\
-&=\sum_{m=1}^{\infty}\sum_{n=1}^{\infty}
-w_{mn}(x,y)\,w_{mn}(x',y')\;\frac{e^{-i\omega_{mn}(t-t')}}{2\,\omega_{mn}}.
-\label{eq:final-orthonormal}
-\end{align}
-Recalling \(w_{mn}(x,y)=u_n(x)v_m(y)\) with \(u_n,v_m\) orthonormal sines, this is
-\begin{align}
-\langle 0|\phi(t,x,y)\phi(t',x',y')|0\rangle
-= \frac{4}{L^2} \sum_{n=1}^\infty\sum_{m=1}^\infty
-\frac{u_n(x)u_n(x')\,v_m(y)v_m(y')}{2\,\omega_{mn}}\;
-e^{-i\omega_{mn}(t-t')}.
-\end{align}
+Similarly, the gradient term is
+\[
+\int d^2\mathbf x\,(\nabla\phi)^2
+=\frac{1}{V_s}\sum_{\mathbf k,\mathbf q}\phi_{\mathbf k}\phi_{\mathbf q}
+\int d^2\mathbf x\,\nabla w_{\mathbf k}\!\cdot\!\nabla w_{\mathbf q}
+=\frac{1}{V_s}\sum_{\mathbf k,\mathbf q}\phi_{\mathbf k}\phi_{\mathbf q}
+\int d^2\mathbf x\,w_{\mathbf k}(-\nabla^2) w_{\mathbf q}
+=\sum_{\mathbf k}\lambda_{\mathbf k}\,|\phi_{\mathbf k}|^2.
+\]
 
 \subsubsection*{Cylinder}
 For the cylinder, all we have to do is change the basis functions to
