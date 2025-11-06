@@ -1230,18 +1230,110 @@ Now Fourier-expand
 \]
 Therefore
 \[
-\int dt \int d^2\mathbf x \; (\partial_t \phi)^2 =\frac{1}{2V}\sum_{\mathbf p}\sum_{a}\omega_a^2\,|\phi_{\mathbf p}^{\,a}|^2.
+\int dt \int d^2\mathbf x \; (\partial_t \phi)^2 =\frac{1}{V}\sum_{\mathbf p}\sum_{a}\omega_a^2\,|\phi_{\mathbf p}^{\,a}|^2.
 \]
 
 Similarly, the gradient term is
-\[
-\int d^2\mathbf x\,(\nabla\phi)^2
-=\frac{1}{V_s}\sum_{\mathbf k,\mathbf q}\phi_{\mathbf k}\phi_{\mathbf q}
-\int d^2\mathbf x\,\nabla w_{\mathbf k}\!\cdot\!\nabla w_{\mathbf q}
-=\frac{1}{V_s}\sum_{\mathbf k,\mathbf q}\phi_{\mathbf k}\phi_{\mathbf q}
-\int d^2\mathbf x\,w_{\mathbf k}(-\nabla^2) w_{\mathbf q}
-=\sum_{\mathbf k}\lambda_{\mathbf k}\,|\phi_{\mathbf k}|^2.
-\]
+\begin{align*}
+\int dt \int d^2\mathbf x\,(\nabla\phi)^2
+&=\frac{1}{V}\sum_{\mathbf p,\mathbf q}\phi_{\mathbf p}\phi_{\mathbf q}
+\int d^2\mathbf x\,\nabla w_{\mathbf p}\!\cdot\!\nabla w_{\mathbf q} \\
+&=\frac{1}{V}\sum_{\mathbf p,\mathbf q}\phi_{\mathbf p}\phi_{\mathbf q}
+\int d^2\mathbf x\,w_{\mathbf p}(-\nabla^2) w_{\mathbf q} \\
+\end{align*}
+From here, we can integrate by parts and notice that for both our relvant
+boundary conditions (Dirichlet and periodic), the boundary term vanishes.
+Meanwhile, for each geometry, $(-\nabla^2)w_p = p_x^2 + p_y^2 \equiv \lambda_p$.
+Thus:
+\begin{align*}
+    \int dt \int d^2\mathbf x (\nabla \phi)^2 
+    &= \int dt \frac{1}{V}\sum_{\mathbf p,\mathbf q}\lambda_q \phi_{\mathbf p}\phi_{\mathbf q}
+    \int d^2\mathbf x\,w_{\mathbf p} w_{\mathbf q} \\ 
+    &= \int dt \frac{1}{V}\sum_{\mathbf p,\mathbf q}\lambda_q \phi_{\mathbf p}\phi_{\mathbf q}
+    \delta_{pq}\\
+    &= \int dt \sum_{\mathbf p}\lambda_{\mathbf p}\,\phi_{\mathbf p}^2.
+\end{align*}
+Similarly, Fourier expanding
+\begin{align*}
+    \int dt \int d^2\mathbf x (\nabla\phi)^2 
+    &= \frac{1}{V} \int dt \sum_{\mathbf p}\sum_{\mathbf a}\lambda_{\mathbf p}\,\phi_{\mathbf p}^a \phi_{\mathbf p}^b e^{-it(\omega_a + \omega_b)} .
+\end{align*}
+Integrating over time, we obtain $\delta(\omega_a + \omega_b)$ which collapses
+$\phi_p^b \to \phi_p^{-a}$. Using $\phi_p^{-a} = \phi_p^{a\+}$, we obtain:
+\begin{align*}
+    \int dt \int d^2\mathbf x (\nabla\phi)^2 
+    &= \frac{1}{V} \sum_{\mathbf p}\sum_{\mathbf a}\lambda_{\mathbf p}\,|\phi_{\mathbf p}^a|^2 
+\end{align*}
+Lastly, using identical arguments, the mass term in the action can be written as:
+\begin{align*}
+    \int dt \int d^2\mathbf x \; m^2\phi^2
+    &= \frac{1}{V} \sum_p \sum_a m^2 |\phi_{\mathbf p}^a|^2
+\end{align*}
+Therefore, our full expansion of the action in Fourier space is
+\begin{align*}
+    S &= \frac{1}{2V} \sum_{p, a} \omega_a^2|\phi_{p}^a|^2 - 
+    \lambda_p |\phi_p^a|^2 - m^2|\phi_p^a|^2 \\
+      &= \frac{1}{2V} \sum_{p,a} |\phi_p^a|^2(\w_a^2 - \w_p^2) \\
+      &= \frac{1}{2V} \sum_{p,a} (\text{Re}(\phi_p^a)^2 +
+      \text{Im}(\phi_p^a)^2)(\w_a^2 - \w_p^2) \\
+\end{align*}
+Where we defined $\omega_p^2 = \lambda_p + m^2$. Now, the denominator of quantity
+we wish to compute is
+\begin{equation*}
+    \int \mathcal{D}\phi e^{i S[\phi]} =
+\end{equation*}
+\begin{align*}
+    &= \int \prod_a d\text{Re}\,\phi^a_{p}\,d\text{Im}\,\phi^a_{p} \exp\left[
+    \frac{i}{2V} \sum_{p,a} (\text{Re}(\phi_p^a)^2 + \text{Im}(\phi_p^a)^2)(\w_a^2
+    - \w_p^2) \right] \\
+    &= \prod_a \left(\int d\text{Re}\,\phi^a_{p}\, \exp\left[
+    \frac{i}{2V} \sum_{p,a} \text{Re}(\phi_p^a)^2 (\w_a^2 - \w_p^2)  \right]
+    \right) \left( \int
+        d\text{Im}\,\phi^a_{p}\exp \Bigg[ \frac{i}{2V} \sum_{p,a} 
+    \text{Im}(\phi_p^a)^2 (\w_a^2 - \w_p^2) \Bigg] \right) \\
+    &= \prod_{p, a} \sqrt{\frac{-2i\pi V}{\w_a^2 - \w_p^2}}
+\end{align*}
+Where we used the standard Gaussian integral result. Now, we must compute the 
+quantity
+\begin{equation*}
+    \int \mathcal{D}\phi e^{i S[\phi]} \phi(x_1)\phi(x_2) =
+\end{equation*}
+\begin{align*}
+    &= \int \prod_a d\text{Re}\,\phi^a_{p}\,d\text{Im}\,\phi^a_{p} \exp\left[
+    \frac{i}{2V} \sum_{p,a} (\text{Re}(\phi_p^a)^2 + \text{Im}(\phi_p^a)^2)(\w_a^2
+    - \w_p^2) \right] \\[1em]
+    &\quad \times \Bigg(\frac{1}{V} \sum_{p, a} e^{-i\omega_a
+    t_1}w_p(x_1)(\text{Re}(\phi_p^a) + i\text{Im}(\phi_p^a))\Bigg) 
+    \Bigg(\frac{1}{V} \sum_{q, b} e^{-i\omega_b t_2}w_q(x_2)(\text{Re}(\phi_q^b) +
+    i\text{Im}(\phi_q^b))\Bigg) \\
+    &= \int \prod_a d\text{Re}\,\phi^a_{p}\,d\text{Im}\,\phi^a_{p} \exp\left[
+    \frac{i}{2V} \sum_{p,a} (\text{Re}(\phi_p^a)^2 + \text{Im}(\phi_p^a)^2)(\w_a^2
+    - \w_p^2) \right] \\[1em]
+    &\quad \times \Bigg(\frac{1}{V^2} \sum_{p, a}\sum_{q, b} e^{-i(\omega_at_1
+    + \omega_bt_2)}w_p(x_1)w_q(x_2)(\text{Re}(\phi_p^a) +
+    i\text{Im}(\phi_p^a))(\text{Re}(\phi_q^b) + i\text{Im}(\phi_q^b))\Bigg) 
+\end{align*}
+As we had seen in class, the only instance in which the integral does not 
+vanish, either due to the integrand being odd or due to the terms involving 
+Re$(\phi_p^a)^2$ cancelling with the Im$(\phi_p^a)^2$ terms, is when $a = -b$
+and $p = q$. Thus we obtain
+\begin{align*}
+    &= \frac{1}{V^2} \prod_{p, a} \sqrt{\frac{-2i\pi V}{\w_a^2 - \w_p^2}}
+    \Bigg(
+        \sum_{p, a} \frac{e^{-i\omega_a(t_1 - t_2)} w_p(x_1)w_p(x_2)}{\w_a^2 -
+        \w_p^2 + i\epsilon}
+    \Bigg)
+\end{align*}
+Therefore we see the denominator cancels with the product in the numerator, and
+we obtain
+\begin{align*}
+    \frac{\int \mathcal D \phi e^{iS[\phi]}\phi(x_1)\phi(x_2)}{\int \mathcal D
+        \phi e^{iS[\phi]}}
+        &= \frac{1}{V^2} \sum_{p, a} \frac{e^{-i\omega_a(t_1 - t_2)}
+        w_p(x_1)w_p(x_2)}{\w_a^2 - \w_p^2 + i\epsilon}
+\end{align*}
+
+
 
 \subsubsection*{Cylinder}
 For the cylinder, all we have to do is change the basis functions to
