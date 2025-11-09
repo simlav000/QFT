@@ -1280,60 +1280,159 @@ Therefore, our full expansion of the action in Fourier space is
 Where we defined $\omega_p^2 = \lambda_p + m^2$. Now, the denominator of quantity
 we wish to compute is
 \begin{equation*}
-    \int \mathcal{D}\phi e^{i S[\phi]} =
+    \int \mathcal{D}\phi e^{-i S[\phi]} =
 \end{equation*}
 \begin{align*}
     &= \int \prod_a d\text{Re}\,\phi^a_{p}\,d\text{Im}\,\phi^a_{p} \exp\left[
-    \frac{i}{2V} \sum_{p,a} (\text{Re}(\phi_p^a)^2 + \text{Im}(\phi_p^a)^2)(\w_a^2
+    \frac{-i}{2V} \sum_{p,a} (\text{Re}(\phi_p^a)^2 + \text{Im}(\phi_p^a)^2)(\w_a^2
     - \w_p^2) \right] \\
     &= \prod_a \left(\int d\text{Re}\,\phi^a_{p}\, \exp\left[
-    \frac{i}{2V} \sum_{p,a} \text{Re}(\phi_p^a)^2 (\w_a^2 - \w_p^2)  \right]
+    \frac{-i}{2V} \sum_{p,a} \text{Re}(\phi_p^a)^2 (\w_a^2 - \w_p^2)  \right]
     \right) \left( \int
-        d\text{Im}\,\phi^a_{p}\exp \Bigg[ \frac{i}{2V} \sum_{p,a} 
+        d\text{Im}\,\phi^a_{p}\exp \Bigg[ \frac{-i}{2V} \sum_{p,a} 
     \text{Im}(\phi_p^a)^2 (\w_a^2 - \w_p^2) \Bigg] \right) \\
-    &= \prod_{p, a} \sqrt{\frac{-2i\pi V}{\w_a^2 - \w_p^2}}
+    &= \prod_{p, a} \bigg( \frac{-2i\pi V}{\w_a^2 - \w_p^2} \bigg)
 \end{align*}
 Where we used the standard Gaussian integral result. Now, we must compute the 
 quantity
 \begin{equation*}
-    \int \mathcal{D}\phi e^{i S[\phi]} \phi(x_1)\phi(x_2) =
+    \int \mathcal{D}\phi e^{-i S[\phi]} \phi(x_1)\phi(x_2) =
 \end{equation*}
 \begin{align*}
     &= \int \prod_a d\text{Re}\,\phi^a_{p}\,d\text{Im}\,\phi^a_{p} \exp\left[
-    \frac{i}{2V} \sum_{p,a} (\text{Re}(\phi_p^a)^2 + \text{Im}(\phi_p^a)^2)(\w_a^2
+    \frac{-i}{2V} \sum_{p,a} (\text{Re}(\phi_p^a)^2 + \text{Im}(\phi_p^a)^2)(\w_a^2
     - \w_p^2) \right] \\[1em]
     &\quad \times \Bigg(\frac{1}{V} \sum_{p, a} e^{-i\omega_a
     t_1}w_p(x_1)(\text{Re}(\phi_p^a) + i\text{Im}(\phi_p^a))\Bigg) 
     \Bigg(\frac{1}{V} \sum_{q, b} e^{-i\omega_b t_2}w_q(x_2)(\text{Re}(\phi_q^b) +
     i\text{Im}(\phi_q^b))\Bigg) \\
     &= \int \prod_a d\text{Re}\,\phi^a_{p}\,d\text{Im}\,\phi^a_{p} \exp\left[
-    \frac{i}{2V} \sum_{p,a} (\text{Re}(\phi_p^a)^2 + \text{Im}(\phi_p^a)^2)(\w_a^2
+    \frac{-i}{2V} \sum_{p,a} (\text{Re}(\phi_p^a)^2 + \text{Im}(\phi_p^a)^2)(\w_a^2
     - \w_p^2) \right] \\[1em]
     &\quad \times \Bigg(\frac{1}{V^2} \sum_{p, a}\sum_{q, b} e^{-i(\omega_at_1
     + \omega_bt_2)}w_p(x_1)w_q(x_2)(\text{Re}(\phi_p^a) +
     i\text{Im}(\phi_p^a))(\text{Re}(\phi_q^b) + i\text{Im}(\phi_q^b))\Bigg) 
 \end{align*}
-As we had seen in class, the only instance in which the integral does not 
-vanish, either due to the integrand being odd or due to the terms involving 
-Re$(\phi_p^a)^2$ cancelling with the Im$(\phi_p^a)^2$ terms, is when $a = -b$
-and $p = q$. Thus we obtain
-\begin{align*}
-    &= \frac{1}{V^2} \prod_{p, a} \sqrt{\frac{-2i\pi V}{\w_a^2 - \w_p^2}}
-    \Bigg(
-        \sum_{p, a} \frac{e^{-i\omega_a(t_1 - t_2)} w_p(x_1)w_p(x_2)}{\w_a^2 -
-        \w_p^2 + i\epsilon}
-    \Bigg)
-\end{align*}
-Therefore we see the denominator cancels with the product in the numerator, and
-we obtain
-\begin{align*}
-    \frac{\int \mathcal D \phi e^{iS[\phi]}\phi(x_1)\phi(x_2)}{\int \mathcal D
-        \phi e^{iS[\phi]}}
-        &= \frac{1}{V^2} \sum_{p, a} \frac{e^{-i\omega_a(t_1 - t_2)}
-        w_p(x_1)w_p(x_2)}{\w_a^2 - \w_p^2 + i\epsilon}
-\end{align*}
 
+Let $\alpha = \frac{i}{2V} \sum_{p,a} (\w_a^2 - \w_p^2)$ such that the exponential
+term can be written as
+\begin{align*}
+    \prod_{p, a} e^{-\alpha \text{Re}(\phi_p^a)^2} e^{-\alpha \text{Im}(\phi_p^a)^2}
+\end{align*}
+notice now that if $a = b$ and $p = q$, these gaussian terms multiply the real and
+imaginary decompositions of $\phi(x_1)$ and $\phi(x_2)$ which explicitly takes
+the form
+\begin{align*}
+    \text{Re}(\phi^a_p)^2 + 2i\text{Im}(\phi_p^a)\text{Re}(\phi_p^a) - \text{Im}(\phi_p^a)^2
+\end{align*}
+where the $2i\text{Im}(\phi_p^a)\text{Re}(\phi_p^a)$ term makes for an integral
+of the form
+\begin{align}
+    \int xe^{-\alpha x^2} = 0
+    \label{eq:gausszero}
+\end{align}
+and thus only the $\text{Re}(\phi_p^a)^2$ and $\text{Im}(\phi_p^a)^2$ survive, 
+but then we are left with 
+\begin{align*}
+        \int \prod_{p, a} d\text{Re}\phi_p^a d\text{Im}\phi_p^a e^{-\alpha
+        \text{Re}(\phi_p^a)^2} e^{-\alpha \text{Im}(\phi_p^a)^2}\left(
+            \frac{1}{V^2} \sum_{p, a} e^{-i\omega_a(t_1 + t_2)}w_p(x_1)w_p(x_2)
+            (\text{Re}(\phi_p^a)^2 - \text{Im}(\phi_p^a)^2)
+        \right)
+\end{align*}
+which we notice is a difference of identical integrals and thus this entire 
+path integral vanishes. 
+If $a \neq b$ and $p \neq q$, the real and imaginary decomposition looks like
+\begin{align*}
+    \text{Re}(\phi^a_p)\text{Re}(\phi^b_q) + i\text{Im}(\phi_p^a)\text{Re}(\phi_p^a) + i\text{Re}(\phi_p^a)\text{Im}(\phi_p^a) - \text{Im}(\phi_p^a) \text{Im}(\phi_q^b)
+\end{align*}
+and so every term looks like equation \ref{eq:gausszero} and the entire integral
+vanishes.
 
+So, we find that this integral only yeilds a nonzero result when $a = -b$ and
+and $p = q$. Thus the real and imaginary expansion is
+\begin{align}
+    (\text{Re}(\phi_p^a) + i\text{Im}(\phi_p^a))(\text{Re}(\phi_p^{-a}) +
+i\text{Im}(\phi_p^{-a}))
+\end{align}
+and using our reality condition $\phi_p^{-a} = (\phi_p^a)^{\+}$, we have
+\begin{align*}
+    (\text{Re}(\phi_p^a) + i\text{Im}(\phi_p^a))(\text{Re}(\phi_p^a) -
+    i\text{Im}(\phi_p^a)) 
+    = \text{Re}(\phi^a_p)^2 + 2i\text{Im}(\phi_p^a)\text{Re}(\phi_p^a) +
+    \text{Im}(\phi_p^a)^2
+\end{align*}
+Where once again the cross terms cancel due to equation \ref{eq:gausszero}
+but instead of the real and imaginary squared terms cancelling, they add.
+This leaves us to solve
+\begin{align*}
+    \int \prod_{p, a} d\text{Re}\phi_p^a d\text{Im}\phi_p^a e^{-\alpha
+    \text{Re}(\phi_p^a)^2} e^{-\alpha \text{Im}(\phi_p^a)^2}\left(
+        \frac{1}{V^2} \sum_{p, a} e^{-i\omega_a(t_1 - t_2)}w_p(x_1)w_p(x_2)
+        (\text{Re}(\phi_p^a)^2 + \text{Im}(\phi_p^a)^2)
+    \right)
+\end{align*}
+which is composed of products of integrals of the form
+\begin{align*}
+    \int d\text{Re}\phi_p^ae^{-\alpha \text{Re}(\phi_p^a)^2}
+    \text{Re}(\phi_p^a)^2 \int d\text{Im}\phi_p^a e^{-\alpha
+    \text{Im}(\phi_p^a)^2} \quad \text{and} \quad 
+    \int d\text{Re}\phi_p^a e^{-\alpha \text{Re}(\phi_p^a)^2} \int
+    d\text{Im}\phi_p^a e^{-\alpha \text{Im}(\phi_p^a)^2} \text{Im}(\phi_p^a)^2
+\end{align*}
+and thus we can use the results
+\begin{align*}
+    \int e^{-\alpha x^2} = \sqrt{\frac{\pi}{\alpha}} \quad \text{and} \quad 
+    \int x^2 e^{-\alpha x^2} = \frac{1}{2\alpha}\sqrt{\frac{\pi}{\alpha}}
+\end{align*}
+to obtain
+\begin{align*}
+    \frac{1}{V^2} \sum_{p, a, l} \Bigg(
+        \prod_k \frac{1}{2\alpha_l}\sqrt{\frac{\pi}{\alpha_k}}
+        \prod_{k'} \sqrt{\frac{\pi}{\alpha_{k'}}} + 
+        \prod_k \frac{1}{2\alpha_l}\sqrt{\frac{\pi}{\alpha_k}}
+        \prod_{k'} \sqrt{\frac{\pi}{\alpha_{k'}}}
+    \Bigg) w(x_1)w(x_2)e^{-i\omega_a(t_1 - t_2)}
+\end{align*}
+Where we only obtain a single one of the $\frac{1}{2\alpha}\sqrt{\frac{\pi}{\alpha}}$
+terms, which occurs when the $a$ in the summation matches that of the exponential
+term, which we label as $\alpha_l$. Since $k$ and $k'$ go over all possibilities,
+this simplifies to
+\begin{align*}
+    \frac{1}{V^2} \sum_{p, a, l} \Bigg(
+    \prod_k \frac{\pi}{\alpha_k} \Bigg)
+    \frac{1}{\alpha_l}w(x_1)w(x_2)e^{-i\omega_a(t_1 - t_2)}
+\end{align*}
+And plugging back in our expressions for $\alpha$
+\begin{align*}
+    \frac{1}{V} \sum_{p, a, l} \Bigg(
+    \prod_k \frac{-2i\pi V}{\w_a^2 - \w_p^2} \Bigg)
+    \frac{-2i\pi w(x_1)w(x_2)e^{-i\omega_a(t_1 - t_2)}}{\w_a^2 - \w_p^2 + i\epsilon}
+\end{align*}
+where we recognize the product in brackets as being exactly the denominator and
+the $i\epsilon$ is added to obtain the Feynmann propagator. We can write the sum
+over $l$ as an integral and obtain
+\begin{align*}
+\frac{1}{V} \sum_{p, a} \int \frac{d\w_a}{2\pi} 
+    \frac{-2i\pi w(x_1)w(x_2)e^{-i\omega_a(t_1 - t_2)}}{\w_a^2 - \w_p^2 + i\epsilon}
+\end{align*}
+and performing the integral by closing the contour from underneath we get
+\begin{equation}
+    \frac{\int \mathcal{D}\phi e^{-i S[\phi]} \phi(x_1)\phi(x_2)}{\int
+    \mathcal{D}\phi e^{-i S[\phi]}} = 
+    \frac{1}{V} \sum_p \frac{w(x_1)w(x_2)e^{-i\omega_p(t_1 - t_2)}}{2\w_p}
+    \label{eq:FINALLY}
+\end{equation}
+For the plane, our normalized basis functions are $u_n(x) = \sqrt{2 / L}\sin(n\pi x / L)$
+and we have $w_{nm}(x_1) = u_n(x_1) u_m(x_1)$ and so we obtain
+\begin{align*}
+    \frac{\int \mathcal{D}\phi e^{-i S[\phi]} \phi(x_1)\phi(x_2)}{\int
+    \mathcal{D}\phi e^{-i S[\phi]}} &= \frac{4}{L^2} \sum_{m, n}
+    \frac{e^{-i\w_p(t_1 - t_2)}}{2\w_p}\sin\left(\frac{n\pi
+    x_1}{L}\right)\sin\left(\frac{m\pi x_1}{L}\right) \sin\left(\frac{n\pi
+x_2}{L}\right)\sin\left(\frac{m\pi x_2}{L}\right)
+\end{align*}
+where we let the normalization account for the volume factor.
 
 \subsubsection*{Cylinder}
 For the cylinder, all we have to do is change the basis functions to
@@ -1341,8 +1440,7 @@ For the cylinder, all we have to do is change the basis functions to
 u_m(x)=\frac{e^{i p_x x}}{\sqrt{2\pi R}},\quad p_x=\frac{m}{R},\quad m\in\mathbb{Z},\qquad
 v_n(y)=\sqrt{\frac{2}{L}}\sin\!\frac{n\pi y}{L},\quad n=1,2,3,\ldots
 \end{align*}
-so that when substituted into \eqref{eq:final-orthonormal}, recalling  that 
-$w_{mn}(x, y) = u_m(x) u_n(y)$, we get
+so that when substituted into \ref{eq:FINALLY}, we obtain
 \begin{align}
 \langle 0|\phi(t,x,y)\phi(t',x',y')|0\rangle
 = \frac{1}{\pi R L} \sum_{m\in\mathbb{Z}}\sum_{n=1}^\infty
@@ -1356,7 +1454,7 @@ For the torus, we change the basis functions to
 u_m(x)=\frac{e^{i p_x x}}{\sqrt{2\pi R_x}},\quad p_x=\frac{m}{R_x},\quad m\in\mathbb{Z},\qquad
 v_n(y)=\frac{e^{i p_y y}}{\sqrt{2\pi R_y}},\quad p_y=\frac{n}{R_y},\quad n\in\mathbb{Z},
 \end{align*}
-so that when substituted into \eqref{eq:final-orthonormal}, we get
+so that when substituted into \eqref{eq:FINALLY}, we get
 \begin{align}
 \langle 0|\phi(t,x,y)\phi(t',x',y')|
 0\rangle
@@ -1364,6 +1462,7 @@ so that when substituted into \eqref{eq:final-orthonormal}, we get
 \frac{e^{i p_x (x - x')}\,e^{i p_y (y - y')}}{2\,\omega_{mn}}\;
 e^{-i\omega_{mn}(t-t')}.
 \end{align}
+therefore both methods are equivalent.
 
 
 \section*{Question 5: Interaction picture and the Heisenberg picture}
@@ -1506,4 +1605,80 @@ and we are allowed to assume that
 \[
 \exp\big\{- S_1[\phi]\big\} \propto \int \mathcal{D}\alpha \exp\bigg\{-S_2[\phi, \alpha]\bigg\},
 \]
+and we want to show
+\[
+    S_2[\phi, \alpha] = \frac{1}{2} \sum_{A, B} \int d^4x d^4y \alpha_A(x)
+    (\Delta^{-1})_{AB}(x,y)\alpha_B(y) - \sum_A\int d^4z \alpha_A(z) \mathcal{O}_a(x)
+\]
+Let us complete the square by introducing a shifted fields
+\[
+    \alpha_A(x) = \alpha'_A(x) + \sum_C \int d^4 z \Delta_{CA}(x, z) \mathcal{O}_C(z) \\
+\]
+\[
+    \alpha_B(y) = \alpha'_B(y) + \sum_D \int d^4 z \Delta_{DB}(y, z) \mathcal{O}_D(z)
+\]
+such that $S_2[\phi, \alpha]$ becomes
+\begin{align*}
+    &= \frac{1}{2}\sum_{A,B} \int d^4x \, d^4 y \left( \alpha'_A(x) + \sum_C
+    \int d^4z \, \Delta_{CA}(x,z) \mathcal{O}_C(z) \right) (\Delta^{-1})_{AB}(x,y)
+    \\[1em]
+    &\quad \times \left(
+            \alpha'_B(y) + \sum_D \int d^4 z \, \Delta_{DB}(y, z) \mathcal{O}_D(z)
+        \right) \\[1em]
+    &\quad - \sum_A \int d^4 z \left( \alpha'_A(z) + \sum_C
+    \int d^4x \, \Delta_{CA}(z,x) \mathcal{O}_C(x) \right)\mathcal{O}_A(x) \\
+    &= \frac{1}{2}\sum_{A,B} \int d^4x \, d^4 y \;
+    \alpha'_A(x)(\Delta^{-1})_{AB}(x,y)\alpha'_B(y) \\[1em]
+    &\quad + \frac{1}{2} \sum_{A,B} \int d^4x \, d^4y \sum_C \int d^4z \Delta_{CA}(x, z)
+    \mathcal{O}_C(z)(\Delta^{-1})_{AB}(x,y) \alpha_B'(y) \\[1em]
+    &\quad + \frac{1}{2} \sum_{A,B} \int d^4x \, d^4y \; \alpha'_A(x)(\Delta^{-1})_{AB}(x,y)
+    \sum_D \int d^4z \Delta_{DB}(y,z)\mathcal{O}_D(z) \\[1em]
+    &\quad + \frac{1}{2} \sum_{A,B} \int d^4x \, d^4y \; \sum_C \int d^4z \;
+    \Delta_{CA}(x, z) \mathcal{O}_C(z) (\Delta^{-1})_{AB}(x,y) \sum_D \int d^4w \;
+    \Delta_{DB}(y, w) \mathcal{O}_D(w) \\[1em]
+    &\quad - \sum_A \int d^4z \; \alpha'_A(z)\mathcal{O}_A(x) - \sum_A \int d^4z
+    \sum_C \int d^4x \; \Delta_{CA}(z, x)\mathcal{O}_C(x)\mathcal{O}_A(x)
+\end{align*}
+From here, we can perform contractions of the form $\Delta_{AB}\Delta^{-1}_{AC}
+= \delta_{BC}$ where it appears as if doing this would require commuting a 
+$\Delta$ with an $\mathcal{O}$, but it just appears as such because we can factor
+such $\mathcal{O}$s who spectate in the contraction. This gives
+\begin{align*}
+    &= \frac{1}{2}\sum_{A,B} \int d^4x \, d^4 y \;
+    \alpha'_A(x)(\Delta^{-1})_{AB}(x,y)\alpha'_B(y) \\[1em]
+    &\quad + \frac{1}{2} \sum_{B, C} \int d^4x \, d^4y \int d^4z \;
+    \mathcal{O}_C(z)\delta_{CB}(z,y) \alpha_B'(y) \\[1em]
+    &\quad + \frac{1}{2} \sum_{A,D} \int d^4x \, d^4y \; \alpha'_A(x)
+    \int d^4z \; \delta_{AD}(x,z) \mathcal{O}_D(z) \\[1em]
+    &\quad + \frac{1}{2} \sum_{A,B} \int d^4x \, d^4y \; \sum_C \int d^4z \;
+     \mathcal{O}_C(z) \sum_D \int d^4w \;
+    \Delta_{DB}(y, w) \mathcal{O}_D(w) \\[1em]
+    &\quad - \sum_A \int d^4z \; \alpha'_A(z)\mathcal{O}_A(x) - \sum_A \int d^4z
+    \sum_C \int d^4x \; \Delta_{CA}(z, x)\mathcal{O}_C(x)\mathcal{O}_A(x)
+\end{align*}
+performing the integrals and collapsing the $\delta$s, we obtain
+\begin{align*}
+    \frac{1}{2} \sum_{AB} \int d^4x \, d^4y \alpha'_A(x) (\Delta^{-1})_{AB}(x,y)
+    \alpha'_B(y) - \frac{1}{2}\sum_{AB}\int d^4 x d^4 z \mathcal{O}_A(x) 
+    \Delta_{AB}(x,y)\mathcal{O}_B(y)
+\end{align*}
+If we exponentiate this result and integrate over field configurations $\alpha$
+\begin{align*}
+    &\int \mathcal{D}\alpha \exp\left[
+    \frac{1}{2} \sum_{AB} \int d^4x \, d^4y \alpha'_A(x) (\Delta^{-1})_{AB}(x,y)
+    \alpha'_B(y) - \frac{1}{2}\sum_{AB}\int d^4 x d^4 z \mathcal{O}_A(x) 
+    \Delta_{AB}(x,y)\mathcal{O}_B(y)
+    \right] \\
+    &= \int \mathcal{D}\alpha \exp\left[
+    \frac{1}{2} \sum_{AB} \int d^4x \, d^4y \alpha'_A(x) (\Delta^{-1})_{AB}(x,y)
+    \alpha'_B(y)\right] \exp \left[ \frac{1}{2}\sum_{AB}\int d^4 x d^4 z
+    \mathcal{O}_A(x) \Delta_{AB}(x,y)\mathcal{O}_B(y)
+    \right]
+\end{align*}
+where the second exponential term is independent of $\alpha$. Thus the first
+integral yields a proportionality factor of the form
+\[
+    \propto 2\pi\det(\Delta)^{\frac{1}{2}}
+\]
+and clearly the second exponential factor has $S_1[\phi]$ as its exponent.
 \end{document}
